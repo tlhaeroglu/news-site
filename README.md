@@ -1,6 +1,3 @@
 # news-site
-#firstcommit
-.
-#mr. tarhan
 
-#mr.talha
+https://img.shields.io/github/contributors/tlhaeroglu/news-site
