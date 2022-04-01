@@ -4,6 +4,8 @@
  */
 package controller;
 
+import dao.UserDAO;
+import util.DBConnection;
 import entity.User;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
@@ -22,63 +24,66 @@ import java.util.List;
 @Named(value = "homeController")
 @SessionScoped
 public class HomeController implements Serializable {
-
-    /**
-     * Creates a new instance of HomeController
-     */
     
-    private String name;
-    private List<User> names;
-    public HomeController() {
-        name = "adem";
+     public HomeController() {
+        
     }
 
-    public List<User> getNames() {
-        return names;
+    private User user;
+    private UserDAO userDAO;
+    private List<User> users;
+    
+   
+    public User getUser() {
+        if(user == null){
+            user = new User();
+        }
+        return user;
     }
 
-    public void setNames(List<User> names) {
-        this.names = names;
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
+    
+    public UserDAO getUserDAO() {
+        if(userDAO == null){
+            userDAO = new UserDAO();
+        }
+        return userDAO;
     }
 
-    public String getName() {
-        return name;
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public List<User> getUsers() {
+        users = getUserDAO().list();
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
+    }
+
+    
+    public void create(){
+        userDAO.create(this.user);
+        user = new User();
+    }
+    
+    public void delete(User user){
+        userDAO.delete(user);
+    }
+    
+    public void update(){
+        userDAO.update(this.user);
+        user = new User();
     }
     
     public List<User> getDatabase(){
-        List<User> list = new ArrayList<>();
-        try{
-         Class.forName("org.postgresql.Driver");
-         Connection c = DriverManager
-            .getConnection("jdbc:postgresql://localhost:5432/news",
-            "postgres", "12345");
-         
-         Statement st = c.createStatement();
-         String query = "SELECT * from users";
-         
-         ResultSet rs = st.executeQuery(query);
-         
-         while(rs.next()){
-             list.add(new User(
-                     rs.getInt(1),
-                     rs.getString(2),
-                     rs.getString(3),
-                     rs.getString(4),
-                     rs.getString(5),
-                     rs.getBoolean(6),
-                     rs.getDate(7)
-             ));
-         }
-        }catch(Exception e ){
-            System.out.println(e.getMessage());
-        }
-        
-        return list;
-        
+        userDAO = new UserDAO();
+       return  userDAO.list();
     }
     
 }

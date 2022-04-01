@@ -9,7 +9,20 @@
     <h:body>
         Yapım aşamasında!
         
-        <h:dataTable border="1" value="#{homeController.getDatabase()}" var="u">
+      
+        <h:form>
+            Ad: <h:inputText value="#{homeController.user.ad}" /><br />
+            Soyad: <h:inputText value="#{homeController.user.soyad}"  /><br />
+            Nickname: <h:inputText value="#{homeController.user.nickname}"  /><br />
+            Sifre: <h:inputText value="#{homeController.user.sifre}" /><br />
+            <h:commandButton rendered="#{homeController.user.userid==0}" action="#{homeController.create()}" value="Create" />
+            <h:commandButton rendered="#{homeController.user.userid!=0}" action="#{homeController.update()}" value="Update" />
+        </h:form>
+        
+        <br></br>
+        <h:form>
+            
+            <h:dataTable border="1" value="#{homeController.getDatabase()}" var="u">
             <h:column>
                 <f:facet name="header"> Id</f:facet>
                 <h:outputText value="#{u.userid}"/>  
@@ -38,7 +51,14 @@
                 <f:facet name="header"> asd</f:facet>
                 <h:outputText value="#{u.kayitTarihi}"/>  
             </h:column>
+            <h:column>
+                <f:facet name="header">YONET</f:facet>
+                <h:commandButton action="#{homeController.delete(u)}" value="X" />
+                <h:commandButton action="#{homeController.setUser(u)}" value="Edit" />
+             </h:column>
         </h:dataTable>
+            
+        </h:form>
     </h:body>
 </html>
 

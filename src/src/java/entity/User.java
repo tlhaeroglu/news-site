@@ -21,6 +21,17 @@ public class User implements Serializable{
     private String ad, soyad, nickname, sifre;
     private boolean isAdmin;
     private Date kayitTarihi;
+    
+    public User(){
+        
+    }
+
+    public User(String ad, String soyad, String nickname, String sifre) {
+        this.ad = ad;
+        this.soyad = soyad;
+        this.nickname = nickname;
+        this.sifre = sifre;
+    }
 
     public User(int userid, String ad, String soyad, String nickname, String sifre, boolean isAdmin, Date kayitTarihi) {
         this.userid = userid;
