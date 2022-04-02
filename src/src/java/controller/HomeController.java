@@ -4,9 +4,11 @@
  */
 package controller;
 
+import dao.ChannelDAO;
 import dao.UserDAO;
 import util.DBConnection;
 import entity.User;
+import entity.Channel;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -25,13 +27,27 @@ import java.util.List;
 @SessionScoped
 public class HomeController implements Serializable {
     
-     public HomeController() {
+    public HomeController() {
         
     }
 
     private User user;
     private UserDAO userDAO;
     private List<User> users;
+    private List<Channel> channels;
+    private ChannelDAO channelDAO;
+    private Channel channel;
+    
+    public Channel getChannel(){
+        if(channel == null){
+            channel = new Channel();
+        }
+        return this.channel;
+    }
+    
+    public void setChannel(Channel channel){
+        this.channel = channel;
+    }
     
    
     public User getUser() {
@@ -72,6 +88,17 @@ public class HomeController implements Serializable {
         user = new User();
     }
     
+    public void createChannel(){
+        channelDAO.create(this.channel);
+        channel = new Channel();
+    }
+    
+    public void deleteChannel(Channel channel){
+        channelDAO.delete(channel);
+        
+    }
+    
+    
     public void delete(User user){
         userDAO.delete(user);
     }
@@ -81,9 +108,19 @@ public class HomeController implements Serializable {
         user = new User();
     }
     
+    public void updateChannel(){
+        channelDAO.update(this.channel);
+        channel = new Channel();
+    }
+    
     public List<User> getDatabase(){
-        userDAO = new UserDAO();
+       userDAO = new UserDAO();
        return  userDAO.list();
+    }
+    
+    public List<Channel> getChannels() {
+        channelDAO = new ChannelDAO();
+        return channelDAO.list();
     }
     
 }

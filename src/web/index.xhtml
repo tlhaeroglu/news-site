@@ -7,9 +7,11 @@
         <title>News Site</title>
     </h:head>
     <h:body>
-        Yapım aşamasında!
-        
-      
+        <h1>
+            User İşlemleri
+        </h1>
+
+
         <h:form>
             Ad: <h:inputText value="#{homeController.user.ad}" /><br />
             Soyad: <h:inputText value="#{homeController.user.soyad}"  /><br />
@@ -18,47 +20,78 @@
             <h:commandButton rendered="#{homeController.user.userid==0}" action="#{homeController.create()}" value="Create" />
             <h:commandButton rendered="#{homeController.user.userid!=0}" action="#{homeController.update()}" value="Update" />
         </h:form>
-        
+
         <br></br>
         <h:form>
-            
+
             <h:dataTable border="1" value="#{homeController.getDatabase()}" var="u">
-            <h:column>
-                <f:facet name="header"> Id</f:facet>
-                <h:outputText value="#{u.userid}"/>  
-            </h:column>
-            <h:column>
-                <f:facet name="header"> Name</f:facet>
-                <h:outputText value="#{u.ad}"/>  
-            </h:column>
-            <h:column>
-                <f:facet name="header">asd </f:facet>
-                <h:outputText value="#{u.soyad}"/>  
-            </h:column>
-            <h:column>
-                <f:facet name="header">asd </f:facet>
-                <h:outputText value="#{u.nickname}"/>  
-            </h:column>
-            <h:column>
-                <f:facet name="header">asd </f:facet>
-                <h:outputText value="#{u.sifre}"/>  
-            </h:column>
-            <h:column>
-                <f:facet name="header"> asd</f:facet>
-                <h:outputText value="#{u.isAdmin}"/>  
-            </h:column>
-            <h:column>
-                <f:facet name="header"> asd</f:facet>
-                <h:outputText value="#{u.kayitTarihi}"/>  
-            </h:column>
-            <h:column>
-                <f:facet name="header">YONET</f:facet>
-                <h:commandButton action="#{homeController.delete(u)}" value="X" />
-                <h:commandButton action="#{homeController.setUser(u)}" value="Edit" />
-             </h:column>
-        </h:dataTable>
+                <h:column>
+                    <f:facet name="header"> Id</f:facet>
+                    <h:outputText value="#{u.userid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Name</f:facet>
+                    <h:outputText value="#{u.ad}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header">asd </f:facet>
+                    <h:outputText value="#{u.soyad}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header">asd </f:facet>
+                    <h:outputText value="#{u.nickname}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header">asd </f:facet>
+                    <h:outputText value="#{u.sifre}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> asd</f:facet>
+                    <h:outputText value="#{u.isAdmin}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> asd</f:facet>
+                    <h:outputText value="#{u.kayitTarihi}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header">YONET</f:facet>
+                    <h:commandButton action="#{homeController.delete(u)}" value="X" />
+                    <h:commandButton action="#{homeController.setUser(u)}" value="Edit" />
+                </h:column>
+            </h:dataTable>
+
+            <br></br> <hr></hr>
+
+            <h1> Kanal İşlemleri </h1>
             
+            <h:dataTable border="1" value="#{homeController.getChannels()}" var="k">
+                <h:column>
+                    <f:facet name="header"> Kanal ID</f:facet>
+                    <h:outputText value="#{k.kanalid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Kanal Adı</f:facet>
+                    <h:outputText value="#{k.kanaladi}"/>  
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">YONET</f:facet>
+                    <h:commandButton action="#{homeController.deleteChannel(k)}" value="X" />
+                    <h:commandButton action="#{homeController.setChannel(k)}" value="Edit" />
+                </h:column>
+
+            </h:dataTable>
+
+            <h:form>
+                Kanal Adi <h:inputText value="#{homeController.channel.kanaladi}" /><br />
+                <h:commandButton rendered="#{homeController.channel.kanalid==0}" action="#{homeController.createChannel()}" value="Create" />
+                <h:commandButton rendered="#{homeController.channel.kanalid!=0}" action="#{homeController.updateChannel()}" value="Update" />
+            </h:form>
+
         </h:form>
+
+
+
     </h:body>
 </html>
 
