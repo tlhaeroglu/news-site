@@ -17,6 +17,12 @@ public class City implements Serializable {
     public City(){
         
     }
+
+    public City(String sehiradi) {
+        this.sehiradi = sehiradi;
+    }
+    
+    
     
     public City(int sehirid,String sehiradi){
         this.sehirid = sehirid;

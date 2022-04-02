@@ -13,18 +13,18 @@
 
 
         <h:form>
-            Ad: <h:inputText value="#{homeController.user.ad}" /><br />
-            Soyad: <h:inputText value="#{homeController.user.soyad}"  /><br />
-            Nickname: <h:inputText value="#{homeController.user.nickname}"  /><br />
-            Sifre: <h:inputText value="#{homeController.user.sifre}" /><br />
-            <h:commandButton rendered="#{homeController.user.userid==0}" action="#{homeController.create()}" value="Create" />
-            <h:commandButton rendered="#{homeController.user.userid!=0}" action="#{homeController.update()}" value="Update" />
+            Ad: <h:inputText value="#{userController.user.ad}" /><br />
+            Soyad: <h:inputText value="#{userController.user.soyad}"  /><br />
+            Nickname: <h:inputText value="#{userController.user.nickname}"  /><br />
+            Sifre: <h:inputText value="#{userController.user.sifre}" /><br />
+            <h:commandButton rendered="#{userController.user.userid==0}" action="#{userController.create()}" value="Create" />
+            <h:commandButton rendered="#{userController.user.userid!=0}" action="#{userController.update()}" value="Update" />
         </h:form>
 
         <br></br>
         <h:form>
 
-            <h:dataTable border="1" value="#{homeController.getDatabase()}" var="u">
+            <h:dataTable border="1" value="#{userController.getDatabase()}" var="u">
                 <h:column>
                     <f:facet name="header"> Id</f:facet>
                     <h:outputText value="#{u.userid}"/>  
@@ -55,16 +55,18 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{homeController.delete(u)}" value="X" />
-                    <h:commandButton action="#{homeController.setUser(u)}" value="Edit" />
+                    <h:commandButton action="#{userController.delete(u)}" value="X" />
+                    <h:commandButton action="#{userController.setUser(u)}" value="Edit" />
                 </h:column>
             </h:dataTable>
+            </h:form>
 
             <br></br> <hr></hr>
 
             <h1> Kanal İşlemleri </h1>
             
-            <h:dataTable border="1" value="#{homeController.getChannels()}" var="k">
+            <h:form>
+                <h:dataTable border="1" value="#{channelController.getChannels()}" var="k">
                 <h:column>
                     <f:facet name="header"> Kanal ID</f:facet>
                     <h:outputText value="#{k.kanalid}"/>  
@@ -76,21 +78,23 @@
 
                 <h:column>
                     <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{homeController.deleteChannel(k)}" value="X" />
-                    <h:commandButton action="#{homeController.setChannel(k)}" value="Edit" />
+                    <h:commandButton action="#{channelController.deleteChannel(k)}" value="X" />
+                    <h:commandButton action="#{channelController.setChannel(k)}" value="Edit" />
                 </h:column>
 
             </h:dataTable>
+            </h:form>
 
             <h:form>
-                Kanal Adi <h:inputText value="#{homeController.channel.kanaladi}" /><br />
-                <h:commandButton rendered="#{homeController.channel.kanalid==0}" action="#{homeController.createChannel()}" value="Create" />
-                <h:commandButton rendered="#{homeController.channel.kanalid!=0}" action="#{homeController.updateChannel()}" value="Update" />
+                Kanal Adi <h:inputText value="#{channelController.channel.kanaladi}" /><br />
+                <h:commandButton rendered="#{channelController.channel.kanalid==0}" action="#{channelController.createChannel()}" value="Create" />
+                <h:commandButton rendered="#{channelController.channel.kanalid!=0}" action="#{channelController.updateChannel()}" value="Update" />
             </h:form>
             
             <h1> Şehir İşlemleri </h1>
             
-            <h:dataTable border="1" value="#{homeController.getCities()}" var="s">
+            <h:form>
+                <h:dataTable border="1" value="#{cityController.getCities()}" var="s">
                 <h:column>
                     <f:facet name="header"> Sehir ID</f:facet>
                     <h:outputText value="#{s.sehirid}"/>  
@@ -102,20 +106,20 @@
 
                 <h:column>
                     <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{homeController.deleteCity(s)}" value="X" />
-                    <h:commandButton action="#{homeController.setCity(s)}" value="Edit" />
+                    <h:commandButton action="#{cityController.deleteCity(s)}" value="X" />
+                    <h:commandButton action="#{cityController.setCity(s)}" value="Edit" />
                 </h:column>
 
             </h:dataTable>
-
-            <h:form>
-                Sehir Adi <h:inputText value="#{homeController.city.sehiradi}" /><br />
-                <h:commandButton rendered="#{homeController.city.sehirid==0}" action="#{homeController.createCity()}" value="Create" />
-                <h:commandButton rendered="#{homeController.city.sehirid!=0}" action="#{homeController.updateCity()}" value="Update" />
             </h:form>
 
-        </h:form>
+            <h:form>
+                Sehir Adi <h:inputText value="#{cityController.city.sehiradi}" /><br />
+                <h:commandButton rendered="#{cityController.city.sehirid==0}" action="#{cityController.createCity()}" value="Create" />
+                <h:commandButton rendered="#{cityController.city.sehirid!=0}" action="#{cityController.updateCity()}" value="Update" />
+            </h:form>
 
+        
         <br></br>
         <br></br>
         <br></br>

@@ -27,7 +27,7 @@ public class CityDAO extends DBConnection {
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sql = "delete from sehir where sehiradi = "+city.getSehiradi();
+            String sql = "delete from sehir where sehirid = "+city.getSehirid();
             
 
             st.executeUpdate(sql);
@@ -45,7 +45,7 @@ public class CityDAO extends DBConnection {
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sql = "update sehir set sehiradi = '"+city.getSehiradi()+"' where kanalid = '"+city.getSehiradi()+"'";
+            String sql = "update sehir set sehiradi = '"+city.getSehiradi()+"' where sehirid = '"+city.getSehirid()+"'";
             
 
             st.executeUpdate(sql);
