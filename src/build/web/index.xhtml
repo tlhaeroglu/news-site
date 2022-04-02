@@ -9,7 +9,6 @@
     <h:body>
         <h1>
             Kullanıcı İşlemleri 
-            Değişiklik 
         </h1>
 
 
@@ -88,9 +87,38 @@
                 <h:commandButton rendered="#{homeController.channel.kanalid==0}" action="#{homeController.createChannel()}" value="Create" />
                 <h:commandButton rendered="#{homeController.channel.kanalid!=0}" action="#{homeController.updateChannel()}" value="Update" />
             </h:form>
+            
+            <h1> Şehir İşlemleri </h1>
+            
+            <h:dataTable border="1" value="#{homeController.getCities()}" var="s">
+                <h:column>
+                    <f:facet name="header"> Sehir ID</f:facet>
+                    <h:outputText value="#{s.sehirid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Şehir Adı</f:facet>
+                    <h:outputText value="#{s.sehiradi}"/>  
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">YONET</f:facet>
+                    <h:commandButton action="#{homeController.deleteCity(s)}" value="X" />
+                    <h:commandButton action="#{homeController.setCity(s)}" value="Edit" />
+                </h:column>
+
+            </h:dataTable>
+
+            <h:form>
+                Sehir Adi <h:inputText value="#{homeController.city.sehiradi}" /><br />
+                <h:commandButton rendered="#{homeController.city.sehirid==0}" action="#{homeController.createCity()}" value="Create" />
+                <h:commandButton rendered="#{homeController.city.sehirid!=0}" action="#{homeController.updateCity()}" value="Update" />
+            </h:form>
 
         </h:form>
 
+        <br></br>
+        <br></br>
+        <br></br>
 
 
     </h:body>

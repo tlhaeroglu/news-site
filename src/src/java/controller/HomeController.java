@@ -5,10 +5,12 @@
 package controller;
 
 import dao.ChannelDAO;
+import dao.CityDAO;
 import dao.UserDAO;
 import util.DBConnection;
 import entity.User;
 import entity.Channel;
+import entity.City;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -36,7 +38,10 @@ public class HomeController implements Serializable {
     private List<User> users;
     private List<Channel> channels;
     private ChannelDAO channelDAO;
-    private Channel channel;
+    private Channel channel; 
+    private City city;
+    private CityDAO cityDAO;
+    private List<City> cities;
     
     public Channel getChannel(){
         if(channel == null){
@@ -47,6 +52,17 @@ public class HomeController implements Serializable {
     
     public void setChannel(Channel channel){
         this.channel = channel;
+    }
+    
+    public City getCity(){
+        if(city == null){
+            city = new City();
+        }
+        return this.city;
+    }
+    
+    public void setCity(City city){
+        this.city = city;
     }
     
    
@@ -98,6 +114,22 @@ public class HomeController implements Serializable {
         
     }
     
+    public void createCity(){
+        cityDAO.create(this.city);
+        city = new City();
+    }
+    
+    public void deleteCity(City city){
+        cityDAO.delete(city);
+        
+    }
+    
+    public void updateCity(){
+        cityDAO.update(this.city);
+        city = new City();
+    }
+    
+    
     
     public void delete(User user){
         userDAO.delete(user);
@@ -121,6 +153,11 @@ public class HomeController implements Serializable {
     public List<Channel> getChannels() {
         channelDAO = new ChannelDAO();
         return channelDAO.list();
+    }
+    
+    public List<City> getCities() {
+        cityDAO = new CityDAO();
+        return cityDAO.list();
     }
     
 }
