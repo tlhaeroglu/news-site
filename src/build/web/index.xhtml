@@ -5,124 +5,37 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>News Site</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"></link>
     </h:head>
     <h:body>
-        <h1>
-            Kullanıcı İşlemleri 
-        </h1>
-
 
         <h:form>
-            Ad: <h:inputText value="#{userController.user.ad}" /><br />
-            Soyad: <h:inputText value="#{userController.user.soyad}"  /><br />
-            Nickname: <h:inputText value="#{userController.user.nickname}"  /><br />
-            Sifre: <h:inputText value="#{userController.user.sifre}" /><br />
-            <h:commandButton rendered="#{userController.user.userid==0}" action="#{userController.create()}" value="Create" />
-            <h:commandButton rendered="#{userController.user.userid!=0}" action="#{userController.update()}" value="Update" />
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <h:commandLink class="navbar-brand" action="/" value="NewSite" />
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <h:commandLink class="nav-link" action="/panel/haber" value="Haber" />
+                        </li>
+                        <li class="nav-item">
+                            <h:commandLink class="nav-link"  action="/panel/channel" value="Kanal" />
+                        </li>
+                        <li class="nav-item">
+                            <h:commandLink class="nav-link"  action="/panel/city" value="Şehir" />
+                        </li>
+                        <li class="nav-item">
+                            <h:commandLink class="nav-link"  action="/panel/user" value="Kullanıcı" />
+                        </li>
+                        <li class="nav-item">
+                            <h:commandLink class="nav-link"  action="/panel/category" value="Kategori" />
+                        </li> 
+                    </ul>
+                </div>
+            </nav>  
         </h:form>
-
-        <br></br>
-        <h:form>
-
-            <h:dataTable border="1" value="#{userController.getDatabase()}" var="u">
-                <h:column>
-                    <f:facet name="header"> Id</f:facet>
-                    <h:outputText value="#{u.userid}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Name</f:facet>
-                    <h:outputText value="#{u.ad}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header">asd </f:facet>
-                    <h:outputText value="#{u.soyad}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header">asd </f:facet>
-                    <h:outputText value="#{u.nickname}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header">asd </f:facet>
-                    <h:outputText value="#{u.sifre}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> asd</f:facet>
-                    <h:outputText value="#{u.isAdmin}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> asd</f:facet>
-                    <h:outputText value="#{u.kayitTarihi}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{userController.delete(u)}" value="X" />
-                    <h:commandButton action="#{userController.setUser(u)}" value="Edit" />
-                </h:column>
-            </h:dataTable>
-            </h:form>
-
-            <br></br> <hr></hr>
-
-            <h1> Kanal İşlemleri </h1>
-            
-            <h:form>
-                <h:dataTable border="1" value="#{channelController.getChannels()}" var="k">
-                <h:column>
-                    <f:facet name="header"> Kanal ID</f:facet>
-                    <h:outputText value="#{k.kanalid}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Kanal Adı</f:facet>
-                    <h:outputText value="#{k.kanaladi}"/>  
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{channelController.deleteChannel(k)}" value="X" />
-                    <h:commandButton action="#{channelController.setChannel(k)}" value="Edit" />
-                </h:column>
-
-            </h:dataTable>
-            </h:form>
-
-            <h:form>
-                Kanal Adi <h:inputText value="#{channelController.channel.kanaladi}" /><br />
-                <h:commandButton rendered="#{channelController.channel.kanalid==0}" action="#{channelController.createChannel()}" value="Create" />
-                <h:commandButton rendered="#{channelController.channel.kanalid!=0}" action="#{channelController.updateChannel()}" value="Update" />
-            </h:form>
-            
-            <h1> Şehir İşlemleri </h1>
-            
-            <h:form>
-                <h:dataTable border="1" value="#{cityController.getCities()}" var="s">
-                <h:column>
-                    <f:facet name="header"> Sehir ID</f:facet>
-                    <h:outputText value="#{s.sehirid}"/>  
-                </h:column>
-                <h:column>
-                    <f:facet name="header"> Şehir Adı</f:facet>
-                    <h:outputText value="#{s.sehiradi}"/>  
-                </h:column>
-
-                <h:column>
-                    <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{cityController.deleteCity(s)}" value="X" />
-                    <h:commandButton action="#{cityController.setCity(s)}" value="Edit" />
-                </h:column>
-
-            </h:dataTable>
-            </h:form>
-
-            <h:form>
-                Sehir Adi <h:inputText value="#{cityController.city.sehiradi}" /><br />
-                <h:commandButton rendered="#{cityController.city.sehirid==0}" action="#{cityController.createCity()}" value="Create" />
-                <h:commandButton rendered="#{cityController.city.sehirid!=0}" action="#{cityController.updateCity()}" value="Update" />
-            </h:form>
-
-        
-        <br></br>
-        <br></br>
-        <br></br>
 
 
     </h:body>

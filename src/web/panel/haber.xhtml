@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Haber's</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:commandButton action="/panel/haber" value="Haber" />
+            <h:commandButton action="/panel/channel" value="Kanal" />
+            <h:commandButton action="/panel/city" value="Şehir" />
+            <h:commandButton action="/panel/user" value="Kullanıcı" />
+            <h:commandButton action="/panel/category" value="Kategori" />
+        </h:form>
+        
+        
+        <h1>
+            Kullanıcı İşlemleri 
+        </h1>
+
+        
+        <h:form>
+            Başlık: <h:inputText value="#{haberController.haber.baslik}" /><br />
+            ImgURL <h:inputText value="#{haberController.haber.imgurl}"  /><br />
+            İçerik: <h:inputText value="#{haberController.haber.icerik}"  /><br />
+            <!-- HaberTarihi <h:inputText value="#{haberController.haber.haberTarihi}" /><br />comment -->
+            userid <h:inputText value="#{haberController.haber.userid}" /><br />
+            kategoriid <h:inputText value="#{haberController.haber.kategoriid}" /><br />
+            sehirid <h:inputText value="#{haberController.haber.sehirid}" /><br />
+            kanalid <h:inputText value="#{haberController.haber.kanalid}" /><br />
+            <h:commandButton rendered="#{haberController.haber.haberid==0}" action="#{haberController.create()}" value="Create" />
+            <h:commandButton rendered="#{haberController.haber.haberid!=0}" action="#{haberController.update()}" value="Update" />
+        </h:form>
+
+        <br></br>
+        <h:form>
+
+            <h:dataTable border="1" value="#{haberController.list()}" var="h">
+                <h:column>
+                    <f:facet name="header"> Başlık</f:facet>
+                    <h:outputText value="#{h.baslik}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> ImgURL</f:facet>
+                    <h:outputText value="#{h.imgurl}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header">İçerik </f:facet>
+                    <h:outputText value="#{h.icerik}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header">HaberTarihi </f:facet>
+                    <h:outputText value="#{h.haberTarihi}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header">userid </f:facet>
+                    <h:outputText value="#{h.userid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> kategoriid</f:facet>
+                    <h:outputText value="#{h.kategoriid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> sehirid</f:facet>
+                    <h:outputText value="#{h.sehirid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> kanalid</f:facet>
+                    <h:outputText value="#{h.kanalid}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header">YONET</f:facet>
+                    <h:commandButton action="#{haberController.delete(h)}" value="X" />
+                    <h:commandButton action="#{haberController.setHaber(h)}" value="Edit" />
+                </h:column>
+            </h:dataTable>
+            </h:form>
+    </h:body>
+</html>
+
