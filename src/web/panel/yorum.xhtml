@@ -13,9 +13,47 @@
             <h:commandButton action="/panel/city" value="Şehir" />
             <h:commandButton action="/panel/user" value="Kullanıcı" />
             <h:commandButton action="/panel/category" value="Kategori" />
+            <h:commandButton action="/panel/yorum" value="Yorum" />
+
         </h:form>
-        
-        
+
+        <h1> Yorum İşlemleri </h1>
+        <h:form>
+            <h:dataTable border="1" value="#{yorumController.getYorumlar()}" var="y">
+                <h:column>
+                    <f:facet name="header"> Yorum ID</f:facet>
+                    <h:outputText value="#{y.yorumId}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> Haber ID</f:facet>
+                    <h:outputText value="#{y.haberId}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> User ID</f:facet>
+                    <h:outputText value="#{y.userID}"/>  
+                </h:column>
+                <h:column>
+                    <f:facet name="header"> İçerik </f:facet>
+                    <h:outputText value="#{y.icerik}"/>  
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">YONET</f:facet>
+                    <h:commandButton action="#{yorumController.delete(y)}" value="X" />
+                    <h:commandButton action="#{yorumController.setYorum(y)}" value="Edit" />
+                </h:column>
+
+            </h:dataTable>
+        </h:form>
+
+        <h:form>
+            Yorum ID <h:inputText value="#{yorumController.yorum.yorumID}" /><br />
+            Haber Id <h:inputText value="#{yorumController.yorum.haberId}" /><br />
+            User ID <h:inputText value="#{yorumController.yorum.userID}"  /><br />
+            İçerik <h:inputText value="#{yorumController.yorum.icerik}"  /><br />
+            <h:commandButton rendered="#{yorumController.yorum.yorumID==0}" action="#{cityController.create()}" value="Create" />
+            <h:commandButton rendered="#{yorumController.yorum.yorumID!=0}" action="#{cityController.update()}" value="Update" />
+        </h:form>
     </h:body>
 </html>
 
