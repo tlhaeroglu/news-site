@@ -5,6 +5,7 @@
 package entity;
 
 import java.util.Date;
+import java.util.List;
 
 /*
 
@@ -24,19 +25,20 @@ public class Haber {
     
     private int haberid;
     private int userid;
-    private int kategoriid;
+    private Category category;
     private int sehirid;
     private int kanalid;
     
     private String baslik, imgurl, icerik;
     private Date haberTarihi;
+    private List<Okuyucu> okuyucular;
 
     public Haber() {
     }
 
-    public Haber(int userid, int kategoriid, int sehirid, int kanalid, String baslik, String imgurl, String icerik) {
+    public Haber(int userid, Category category, int sehirid, int kanalid, String baslik, String imgurl, String icerik) {
         this.userid = userid;
-        this.kategoriid = kategoriid;
+        this.category = category;
         this.sehirid = sehirid;
         this.kanalid = kanalid;
         this.baslik = baslik;
@@ -44,19 +46,19 @@ public class Haber {
         this.icerik = icerik;
     }
 
-    public Haber(int haberid, int userid, int kategoriid, int sehirid, int kanalid, String baslik, String imgurl, String icerik, Date haberTarihi) {
+    public Haber(int haberid, int userid, Category category, int sehirid, int kanalid, String baslik, String imgurl, String icerik, Date haberTarihi, List<Okuyucu> okuyucular) {
         this.haberid = haberid;
         this.userid = userid;
-        this.kategoriid = kategoriid;
+        this.category = category;
         this.sehirid = sehirid;
         this.kanalid = kanalid;
         this.baslik = baslik;
         this.imgurl = imgurl;
         this.icerik = icerik;
         this.haberTarihi = haberTarihi;
+        this.okuyucular = okuyucular;
     }
-    
-    
+
 
     public int getHaberid() {
         return haberid;
@@ -74,13 +76,15 @@ public class Haber {
         this.userid = userid;
     }
 
-    public int getKategoriid() {
-        return kategoriid;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setKategoriid(int kategoriid) {
-        this.kategoriid = kategoriid;
+    public void setCategory(Category category) {
+        this.category = category;
     }
+
+    
 
     public int getSehirid() {
         return sehirid;
@@ -129,6 +133,19 @@ public class Haber {
     public void setHaberTarihi(Date haberTarihi) {
         this.haberTarihi = haberTarihi;
     }
+
+    public List<Okuyucu> getOkuyucular() {
+        return okuyucular;
+    }
+
+    public void setOkuyucular(List<Okuyucu> okuyucular) {
+        this.okuyucular = okuyucular;
+    }
+    
+    public int getOkuyucuSayisi(){
+        return okuyucular.size();
+    }
+    
     
     
 }

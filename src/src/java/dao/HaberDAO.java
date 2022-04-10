@@ -51,7 +51,7 @@ public class HaberDAO extends DBConnection{
             st.setString(2, haber.getImgurl());
             st.setString(3, haber.getIcerik());
             st.setInt(4, haber.getUserid());
-            st.setInt(5, haber.getKategoriid());
+            st.setInt(5, haber.getCategory().getKategoriid());
             st.setInt(6, haber.getSehirid());
             st.setInt(7, haber.getKanalid());
             st.setInt(8, haber.getHaberid());
@@ -78,7 +78,7 @@ public class HaberDAO extends DBConnection{
             st.setString(2, haber.getImgurl());
             st.setString(3, haber.getIcerik());
             st.setInt(4, haber.getUserid());
-            st.setInt(5, haber.getKategoriid());
+            st.setInt(5, haber.getCategory().getKategoriid());
             st.setInt(6, haber.getSehirid());
             st.setInt(7, haber.getKanalid());
    
@@ -100,17 +100,21 @@ public class HaberDAO extends DBConnection{
 
             ResultSet rs = st.executeQuery(query);
             
+            OkuyucuDAO okuyucudao = new OkuyucuDAO();
+            CategoryDAO categorydao = new CategoryDAO();
+            
              while(rs.next()){
              list.add(new Haber(
                      rs.getInt("haberid"),
                      rs.getInt("userid"),
-                     rs.getInt("kategoriid"),
+                     categorydao.findByID(rs.getInt("kategoriid")),
                      rs.getInt("sehirid"),
                      rs.getInt("kanalid"),
                      rs.getString("baslik"),
                      rs.getString("imgurl"),
                      rs.getString("icerik"),
-                     rs.getDate("haberTarihi")
+                     rs.getDate("haberTarihi"),
+                     okuyucudao.findById(rs.getInt("haberid"))
              ));
              
          }
@@ -120,5 +124,28 @@ public class HaberDAO extends DBConnection{
         }
 
         return list;
+    }
+    
+    
+    public String getUsername(int id){
+        String username = "";
+        try {
+            Connection c = this.connect();
+
+            String query = "SELECT nickname from users where userid="+id;
+            Statement st = c.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+            
+            while(rs.next()){
+             username = rs.getString("nickname");
+             
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return username;
     }
 }

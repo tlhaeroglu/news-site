@@ -64,6 +64,10 @@ public class HaberController implements Serializable {
         return haberDAO.list();
     }
     
+    public String getUsername(int id){
+        return haberDAO.getUsername(id);
+    }
+    
     
     
     

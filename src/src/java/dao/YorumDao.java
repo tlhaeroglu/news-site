@@ -6,17 +6,15 @@ package dao;
 
 import entity.Yorum;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import util.DBConnection;
 
-/**
- *
- * @author ademtarhan
- */
-public class YorumDao  extends DBConnection{
+
+public class YorumDao extends DBConnection{
     //..Delete
     
     public String delete(Yorum yorum){
@@ -24,7 +22,7 @@ public class YorumDao  extends DBConnection{
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sql = "delete from yorum where yorumid = "+yorum.getYorumID();
+            String sql = "delete from yorum where yorumid = "+yorum.getYorumid();
             
 
             st.executeUpdate(sql);
@@ -42,7 +40,7 @@ public class YorumDao  extends DBConnection{
         try{
             Connection c = this.connect();
             Statement st = c.createStatement();
-            String sql = "update yorum set yorumicerik = '"+yorum.getIcerik()+"' where yorumid = '"+yorum.getYorumID()+"'";
+            String sql = "update yorum set icerik='"+yorum.getIcerik()+"' where yorumid = "+yorum.getYorumid();
             
 
             st.executeUpdate(sql);
@@ -59,9 +57,10 @@ public class YorumDao  extends DBConnection{
         
         try{
             Connection c = this.connect();
-            Statement st = c.createStatement();
-            String sql = "insert into yorum (yorumicerik) values ('"+yorum.getIcerik()+"')";
+            String sql = "insert into yorum (userid,haberid,icerik) values ("+yorum.getUserid()+","+yorum.getHaberid()+", '"+yorum.getIcerik()+"')";
             
+            Statement st = c.createStatement();
+           
 
             st.executeUpdate(sql);
         } catch (Exception e){
@@ -83,11 +82,11 @@ public class YorumDao  extends DBConnection{
             
              while(rs.next()){
              list.add(new Yorum(
-                     rs.getInt(1),
-                     rs.getInt(2),
-                     rs.getInt(3),
-                     rs.getString(4),
-                     rs.getDate(5)
+                     rs.getInt("yorumid"),
+                     rs.getInt("userid"),
+                     rs.getInt("haberid"),
+                     rs.getString("icerik"),
+                     rs.getDate("yorumTarihi")
              ));
          }
             

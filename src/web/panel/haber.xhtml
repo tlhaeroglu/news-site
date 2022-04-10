@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>Haber's</title>
     </h:head>
@@ -28,7 +29,10 @@
             İçerik: <h:inputText value="#{haberController.haber.icerik}"  /><br />
             <!-- HaberTarihi <h:inputText value="#{haberController.haber.haberTarihi}" /><br />comment -->
             userid <h:inputText value="#{haberController.haber.userid}" /><br />
-            kategoriid <h:inputText value="#{haberController.haber.kategoriid}" /><br />
+            kategori
+            <h:selectOneMenu value="#{haberController.haber.category}" converter="categoryConverter"> 
+                <f:selectItems value="#{categoryController.getCategorys()}" var="c" itemValue="#{c}" itemLabel="#{c.kategoriadi}" />
+            </h:selectOneMenu> <br />
             sehirid <h:inputText value="#{haberController.haber.sehirid}" /><br />
             kanalid <h:inputText value="#{haberController.haber.kanalid}" /><br />
             <h:commandButton rendered="#{haberController.haber.haberid==0}" action="#{haberController.create()}" value="Create" />
@@ -39,6 +43,10 @@
         <h:form>
 
             <h:dataTable border="1" value="#{haberController.list()}" var="h">
+                <h:column>
+                    <f:facet name="header"> ID </f:facet>
+                    <h:outputText value="#{h.haberid}"/>  
+                </h:column>
                 <h:column>
                     <f:facet name="header"> Başlık</f:facet>
                     <h:outputText value="#{h.baslik}"/>  
@@ -61,7 +69,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header"> kategoriid</f:facet>
-                    <h:outputText value="#{h.kategoriid}"/>  
+                    <h:outputText value="#{h.category.kategoriadi}"/>  
                 </h:column>
                 <h:column>
                     <f:facet name="header"> sehirid</f:facet>
@@ -71,6 +79,14 @@
                     <f:facet name="header"> kanalid</f:facet>
                     <h:outputText value="#{h.kanalid}"/>  
                 </h:column>
+                
+                <h:column>
+                    <f:facet name="header"> Okuyucular</f:facet>
+                     <ui:repeat value="#{h.okuyucular}" var="o">
+                         <div> #{haberController.getUsername(o.userid)} </div>
+                     </ui:repeat>
+                </h:column>
+                
                 <h:column>
                     <f:facet name="header">YONET</f:facet>
                     <h:commandButton action="#{haberController.delete(h)}" value="X" />

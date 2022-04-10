@@ -37,6 +37,28 @@ public class Category {
     public void setKategoriadi(String kategoriadi) {
         this.kategoriadi = kategoriadi;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 73 * hash + this.kategoriid;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Category other = (Category) obj;
+        return this.kategoriid == other.kategoriid;
+    }
     
     
 }

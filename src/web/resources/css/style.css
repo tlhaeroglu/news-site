@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+
+body{
+    font-family: 'Comfortaa', cursive !important;
+}
+
+.img{
+    border-radius: 10px solid #fff;
+}
+
+.h-wrap{
+    padding: 40px;
+}
+
+.h-wrap .h3{
+    padding: 25px 20px;
+}
+
+.h-wrap .icerik{
+    padding: 16px;
+    font-size: 1.4rem;
+}
+
+.h-wrap .author{
+    padding: 10px;
+    font-size: .9rem;
+}
+
+
+.h-wrap .tarih{
+    padding: 20px;
+    font-size: 1.2rem;
+    text-align: right;
+}
+
+.info{
+    text-align: center;
+}
+
+.cat{
+    padding: 3px 7px;
+    background-color: red;
+    color: #fff;
+    border-radius: 10px;
+}
+
+.city{
+    margin: 10px;
+}
+
+.city span{
+    margin: 4px;
+    padding: 4px 7px;
+    background-color: rgb(0, 48, 222);
+    color: #fff;
+    border-radius: 10px;
+}
+
+.ch{
+    padding: 3px 7px;
+    background-color: rgb(14, 141, 0);
+    color: #fff;
+    border-radius: 10px;
+}
+
+
+
+.tarih span{
+    border: 1px solid #808080;
+    padding: 5px 10px;
+    border-radius: 30px;
+}

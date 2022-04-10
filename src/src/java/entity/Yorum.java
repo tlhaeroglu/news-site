@@ -12,49 +12,54 @@ import java.util.Date;
  */
 public class Yorum {
 
-    private int yorumID;
-    private int haberId;
-    private int userID;
+    private int yorumid;
+    private int haberid;
+    private int userid;
     private String icerik;
     private Date yorumTarihi;
 
     public Yorum() {
     }
 
-    public Yorum(String icerik) {
+    public Yorum(int haberid, int userid, String icerik) {
+        this.haberid = haberid;
+        this.userid = userid;
         this.icerik = icerik;
     }
+    
 
-    public Yorum(int yorumID, int haberId, int userID, String icerik, Date yorumTarihi) {
-        this.yorumID = yorumID;
-        this.haberId = haberId;
-        this.userID = userID;
+    public Yorum(int yorumid, int haberid, int userid, String icerik, Date yorumTarihi) {
+        this.yorumid = yorumid;
+        this.haberid = haberid;
+        this.userid = userid;
         this.icerik = icerik;
         this.yorumTarihi = yorumTarihi;
     }
+    
+    
 
-    public int getYorumID() {
-        return yorumID;
+    public int getYorumid() {
+        return yorumid;
     }
 
-    public void setYorumID(int yorumID) {
-        this.yorumID = yorumID;
+    public void setYorumid(int yorumid) {
+        this.yorumid = yorumid;
     }
 
-    public int getHaberId() {
-        return haberId;
+    public int getHaberid() {
+        return haberid;
     }
 
-    public void setHaberId(int haberId) {
-        this.haberId = haberId;
+    public void setHaberid(int haberid) {
+        this.haberid = haberid;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUserid() {
+        return userid;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getIcerik() {
@@ -72,7 +77,7 @@ public class Yorum {
     public void setYorumTarihi(Date yorumTarihi) {
         this.yorumTarihi = yorumTarihi;
     }
-    
-    
+
+   
 
 }

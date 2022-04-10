@@ -2,10 +2,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>News Site</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"></link>
+        <h:outputStylesheet library="css" name = "style.css" /> 
+
     </h:head>
     <h:body>
 
@@ -39,6 +42,41 @@
                 </div>
             </nav>  
         </h:form>
+
+        <div class="container">
+            <div class="row">
+                <ui:repeat value="#{haberController.list()}" var="h">
+
+                    <div class="col-6">
+
+                        <div class="haber">
+                            <div class="h-wrap">
+                                <h3 class="h3"> #{h.baslik} </h3>
+                                <div class="author"> 
+                                    <span>#{h.userid}</span> 
+                                </div>
+                                <h:graphicImage library="images" name="example.jpg" class="img-fluid"></h:graphicImage>
+                                    <p class="icerik"> #{h.icerik}</p>
+
+
+                                    <div class="info">
+                                        <span class="cat"> #{h.category.kategoriadi} </span>
+                                        <div class="city"> 
+                                            <span> Malatya </span>
+                                            <span> Elazığ </span>
+                                        </div>
+                                        <span class="ch"> Kafadarlar </span>
+                                    </div>
+                                    <p class="tarih"><span>#{h.haberTarihi}</span></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </ui:repeat>
+            </div>
+        </div>
+
 
 
     </h:body>

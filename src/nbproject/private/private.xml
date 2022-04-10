@@ -4,24 +4,21 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/dao/CategoryDAO.java</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/panel/channel.xhtml</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/entity/Okuyucu.java</file>
             <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/panel/category.xhtml</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/controller/CityController.java</file>
             <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/controller/HaberController.java</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/entity/City.java</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/dao/ChannelDAO.java</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/controller/UserController.java</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/entity/Yorum.java</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/resources/css/style.css</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/entity/Category.java</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/controller/YorumController.java</file>
             <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/panel/yorum.xhtml</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/panel/haber.xhtml</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/dao/OkuyucuDAO.java</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/converter/CategoryConverter.java</file>
             <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/dao/HaberDAO.java</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/dao/CityDAO.java</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/controller/ChannelController.java</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/panel/user.xhtml</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/dao/UserDAO.java</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/controller/CategoryController.java</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/panel/haber.xhtml</file>
+            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/dao/YorumDao.java</file>
             <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/src/java/entity/Haber.java</file>
             <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/index.xhtml</file>
-            <file>file:/C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/panel/city.xhtml</file>
         </group>
     </open-files>
 </project-private>

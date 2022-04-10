@@ -92,4 +92,29 @@ public class CategoryDAO extends DBConnection{
 
         return list;
     }
+    
+    public Category findByID(int id){
+        Category category = new Category();
+        
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT * from kategori where kategoriid = "+id;
+
+            ResultSet rs = st.executeQuery(query);
+            
+             while(rs.next()){
+             category = new Category(
+                     rs.getInt(1),
+                     rs.getString(2)
+             );
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return category;
+    }
 }

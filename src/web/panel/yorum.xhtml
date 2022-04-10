@@ -22,15 +22,15 @@
             <h:dataTable border="1" value="#{yorumController.getYorumlar()}" var="y">
                 <h:column>
                     <f:facet name="header"> Yorum ID</f:facet>
-                    <h:outputText value="#{y.yorumId}"/>  
+                    <h:outputText value="#{y.yorumid}"/>  
                 </h:column>
                 <h:column>
                     <f:facet name="header"> Haber ID</f:facet>
-                    <h:outputText value="#{y.haberId}"/>  
+                    <h:outputText value="#{y.haberid}"/>  
                 </h:column>
                 <h:column>
                     <f:facet name="header"> User ID</f:facet>
-                    <h:outputText value="#{y.userID}"/>  
+                    <h:outputText value="#{y.userid}"/>  
                 </h:column>
                 <h:column>
                     <f:facet name="header"> İçerik </f:facet>
@@ -47,12 +47,11 @@
         </h:form>
 
         <h:form>
-            Yorum ID <h:inputText value="#{yorumController.yorum.yorumID}" /><br />
-            Haber Id <h:inputText value="#{yorumController.yorum.haberId}" /><br />
-            User ID <h:inputText value="#{yorumController.yorum.userID}"  /><br />
+            Haber Id <h:inputText value="#{yorumController.yorum.haberid}" /><br />
+            User ID <h:inputText value="#{yorumController.yorum.userid}"  /><br />
             İçerik <h:inputText value="#{yorumController.yorum.icerik}"  /><br />
-            <h:commandButton rendered="#{yorumController.yorum.yorumID==0}" action="#{cityController.create()}" value="Create" />
-            <h:commandButton rendered="#{yorumController.yorum.yorumID!=0}" action="#{cityController.update()}" value="Update" />
+            <h:commandButton rendered="#{yorumController.yorum.yorumid==0}" action="#{yorumController.create()}" value="Create" />
+            <h:commandButton rendered="#{yorumController.yorum.yorumid!=0}" action="#{yorumController.update()}" value="Update" />
         </h:form>
     </h:body>
 </html>

@@ -58,6 +58,7 @@ public class YorumController implements Serializable {
     
     
     public void create(){
+        yorumDao = new YorumDao();
         yorumDao.create(this.yorum);
         yorum = new Yorum();
     }
