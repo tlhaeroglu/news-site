@@ -98,6 +98,56 @@ public class CityDAO extends DBConnection {
         return list;
     }
     
+    public List<City> findById(int id) {
+        List<City> cities = new ArrayList<>();
+        
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT * from haber_sehir where haberid = "+id;
+
+            ResultSet rs = st.executeQuery(query);
+            
+             while(rs.next()){
+             cities.add( new City(
+                     rs.getInt(1),
+                     rs.getString(2)
+             ));
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return cities;
+    }
+    
+    public City convByID(int id){
+        City city = new City();
+        
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT * from sehir where sehirid = "+id;
+
+            ResultSet rs = st.executeQuery(query);
+            
+             while(rs.next()){
+             city = new City(
+                     rs.getInt(1),
+                     rs.getString(2)
+             );
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return city;
+    }
+    
     
     
 }

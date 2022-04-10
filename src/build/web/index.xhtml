@@ -53,7 +53,7 @@
                             <div class="h-wrap">
                                 <h3 class="h3"> #{h.baslik} </h3>
                                 <div class="author"> 
-                                    <span>#{h.userid}</span> 
+                                    <span>#{haberController.getUsername(h.userid)}</span> 
                                 </div>
                                 <h:graphicImage library="images" name="example.jpg" class="img-fluid"></h:graphicImage>
                                     <p class="icerik"> #{h.icerik}</p>
@@ -62,10 +62,11 @@
                                     <div class="info">
                                         <span class="cat"> #{h.category.kategoriadi} </span>
                                         <div class="city"> 
-                                            <span> Malatya </span>
-                                            <span> Elazığ </span>
+                                            <ui:repeat value="#{h.cities}" var="c">
+                                                <span> #{c.sehiradi} </span>
+                                            </ui:repeat>
                                         </div>
-                                        <span class="ch"> Kafadarlar </span>
+                                        <span class="ch"> #{h.channel.kanaladi} </span>
                                     </div>
                                     <p class="tarih"><span>#{h.haberTarihi}</span></p>
                             </div>

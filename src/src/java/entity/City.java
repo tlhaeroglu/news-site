@@ -44,5 +44,29 @@ public class City implements Serializable {
     public void setSehiradi(String sehiradi) {
         this.sehiradi = sehiradi;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + this.sehirid;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final City other = (City) obj;
+        return this.sehirid == other.sehirid;
+    }
+    
+    
     
 }

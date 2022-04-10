@@ -27,16 +27,18 @@
             Başlık: <h:inputText value="#{haberController.haber.baslik}" /><br />
             ImgURL <h:inputText value="#{haberController.haber.imgurl}"  /><br />
             İçerik: <h:inputText value="#{haberController.haber.icerik}"  /><br />
-            <!-- HaberTarihi <h:inputText value="#{haberController.haber.haberTarihi}" /><br />comment -->
             userid <h:inputText value="#{haberController.haber.userid}" /><br />
             kategori
             <h:selectOneMenu value="#{haberController.haber.category}" converter="categoryConverter"> 
                 <f:selectItems value="#{categoryController.getCategorys()}" var="c" itemValue="#{c}" itemLabel="#{c.kategoriadi}" />
             </h:selectOneMenu> <br />
-            sehirid <h:inputText value="#{haberController.haber.sehirid}" /><br />
+            Sehirler
+            <h:selectManyMenu  value="#{haberController.haber.cities}" converter="cityConverter"> 
+                <f:selectItems value="#{cityController.getCities()}" var="s" itemValue="#{s}" itemLabel="#{s.sehiradi}" />
+            </h:selectManyMenu> <br />
             kanal
             <h:selectOneMenu value="#{haberController.haber.channel}" converter="channelConverter"> 
-                <f:selectItems value="#{channelController.getChannels()}" var="c" itemValue="#{c}" itemLabel="#{c.kanaladi}" />
+                <f:selectItems value="#{channelController.getChannels()}" var="k" itemValue="#{k}" itemLabel="#{k.kanaladi}" />
             </h:selectOneMenu> <br />
             <h:commandButton rendered="#{haberController.haber.haberid==0}" action="#{haberController.create()}" value="Create" />
             <h:commandButton rendered="#{haberController.haber.haberid!=0}" action="#{haberController.update()}" value="Update" />
@@ -67,8 +69,8 @@
                     <h:outputText value="#{h.haberTarihi}"/>  
                 </h:column>
                 <h:column>
-                    <f:facet name="header">userid </f:facet>
-                    <h:outputText value="#{h.userid}"/>  
+                    <f:facet name="header">Nickname </f:facet>
+                    <h:outputText value="#{haberController.getUsername(h.userid)}"/>  
                 </h:column>
                 <h:column>
                     <f:facet name="header"> kategoriid</f:facet>
@@ -76,7 +78,9 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header"> sehirid</f:facet>
-                    <h:outputText value="#{h.sehirid}"/>  
+                    <ui:repeat value="#{h.cities}" var="c">
+                        <div> #{c.sehiradi} </div>
+                    </ui:repeat>
                 </h:column>
                 <h:column>
                     <f:facet name="header"> kanalid</f:facet>
@@ -92,7 +96,7 @@
                 <h:column>
                     <f:facet name="header"> Yorumlar</f:facet>
                      <ui:repeat value="#{h.yorumlar}" var="y">
-                         <div> #{haberController.getYorumicerik(y.yorumid)} </div>
+                         <div> #{y.icerik} </div>
                      </ui:repeat>
                 </h:column>
                 

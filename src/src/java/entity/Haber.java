@@ -26,7 +26,7 @@ public class Haber {
     private int haberid;
     private int userid;
     private Category category;
-    private int sehirid;
+    private List<City> cities;
     private Channel channel;
     
     private String baslik, imgurl, icerik;
@@ -37,21 +37,21 @@ public class Haber {
     public Haber() {
     }
 
-    public Haber(int userid, Category category, int sehirid, Channel channel, String baslik, String imgurl, String icerik) {
+    public Haber(int userid, Category category, List<City> cities, Channel channel, String baslik, String imgurl, String icerik) {
         this.userid = userid;
         this.category = category;
-        this.sehirid = sehirid;
+        this.cities = cities;
         this.channel = channel;
         this.baslik = baslik;
         this.imgurl = imgurl;
         this.icerik = icerik;
     }
 
-    public Haber(int haberid, int userid, Category category, int sehirid, Channel channel, String baslik, String imgurl, String icerik, Date haberTarihi, List<Okuyucu> okuyucular, List<Yorum> yorumlar) {
+    public Haber(int haberid, int userid, Category category, List<City> cities, Channel channel, String baslik, String imgurl, String icerik, Date haberTarihi, List<Okuyucu> okuyucular, List<Yorum> yorumlar) {
         this.haberid = haberid;
         this.userid = userid;
         this.category = category;
-        this.sehirid = sehirid;
+        this.cities = cities;
         this.channel = channel;
         this.baslik = baslik;
         this.imgurl = imgurl;
@@ -86,15 +86,15 @@ public class Haber {
         this.category = category;
     }
 
-    
-
-    public int getSehirid() {
-        return sehirid;
+    public List<City> getCities() {
+        return cities;
     }
 
-    public void setSehirid(int sehirid) {
-        this.sehirid = sehirid;
+    public void setCities(List<City> cities) {
+        this.cities = cities;
     }
+
+
 
     public Channel getChannel() {
         return channel;

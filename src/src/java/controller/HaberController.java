@@ -46,30 +46,39 @@ public class HaberController implements Serializable {
     }
     
     public void create(){
-        haberDAO.create(this.haber);
+        this.getHaberDAO().create(this.haber);
         haber = new Haber();
     }
     
     public void update(){
-        haberDAO.update(haber);
+        this.getHaberDAO().update(haber);
         haber = new Haber();
+    }
+
+    public HaberDAO getHaberDAO() {
+        if(haberDAO == null){
+            haberDAO = new HaberDAO();
+        }
+        return haberDAO;
+    }
+
+    public void setHaberDAO(HaberDAO haberDAO) {
+        this.haberDAO = haberDAO;
     }
     
     public void delete(Haber haber){
-        haberDAO.delete(haber);
+        this.getHaberDAO().delete(haber);
+        haber = new Haber();
     }
     
     public List<Haber> list(){
-        haberDAO = new HaberDAO();
-        return haberDAO.list();
+        return this.getHaberDAO().list();
     }
     
     public String getUsername(int id){
-        return haberDAO.getUsername(id);
+        return this.getHaberDAO().getUsername(id);
     }
     
-    public String getYorumicerik(int id) {
-        return haberDAO.getYorumicerik(id);
-    }
+   
     
 }
