@@ -27,7 +27,7 @@ public class Haber {
     private int userid;
     private Category category;
     private int sehirid;
-    private int kanalid;
+    private Channel channel;
     
     private String baslik, imgurl, icerik;
     private Date haberTarihi;
@@ -36,22 +36,22 @@ public class Haber {
     public Haber() {
     }
 
-    public Haber(int userid, Category category, int sehirid, int kanalid, String baslik, String imgurl, String icerik) {
+    public Haber(int userid, Category category, int sehirid, Channel channel, String baslik, String imgurl, String icerik) {
         this.userid = userid;
         this.category = category;
         this.sehirid = sehirid;
-        this.kanalid = kanalid;
+        this.channel = channel;
         this.baslik = baslik;
         this.imgurl = imgurl;
         this.icerik = icerik;
     }
 
-    public Haber(int haberid, int userid, Category category, int sehirid, int kanalid, String baslik, String imgurl, String icerik, Date haberTarihi, List<Okuyucu> okuyucular) {
+    public Haber(int haberid, int userid, Category category, int sehirid, Channel channel, String baslik, String imgurl, String icerik, Date haberTarihi, List<Okuyucu> okuyucular) {
         this.haberid = haberid;
         this.userid = userid;
         this.category = category;
         this.sehirid = sehirid;
-        this.kanalid = kanalid;
+        this.channel = channel;
         this.baslik = baslik;
         this.imgurl = imgurl;
         this.icerik = icerik;
@@ -94,13 +94,16 @@ public class Haber {
         this.sehirid = sehirid;
     }
 
-    public int getKanalid() {
-        return kanalid;
+    public Channel getChannel() {
+        return channel;
     }
 
-    public void setKanalid(int kanalid) {
-        this.kanalid = kanalid;
+    public void setChannel(Channel channel) {
+        this.channel = channel;
     }
+
+   
+
 
     public String getBaslik() {
         return baslik;

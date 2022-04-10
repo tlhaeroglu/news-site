@@ -84,8 +84,8 @@ public class ChannelDAO extends DBConnection {
             
              while(rs.next()){
              list.add(new Channel(
-                     rs.getInt(1),
-                     rs.getString(2)
+                     rs.getInt("kanalid"),
+                     rs.getString("kanaladi")
              ));
          }
             
@@ -94,6 +94,35 @@ public class ChannelDAO extends DBConnection {
         }
 
         return list;
+    }
+    
+   
+    
+   
+
+    public Channel findById(int id) {
+        Channel channel = new Channel();
+        
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT * from kanal where kanalid = "+id;
+
+            ResultSet rs = st.executeQuery(query);
+            
+             while(rs.next()){
+             channel = new Channel(
+                     rs.getInt(1),
+                     rs.getString(2)
+             );
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return channel;
     }
 
 }

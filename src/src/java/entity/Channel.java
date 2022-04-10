@@ -20,16 +20,16 @@ public class Channel implements Serializable {
         
     }
     
+    public Channel(String kanaladi) {
+        this.kanaladi = kanaladi;
+    }
+    
     
     public Channel(int kanalid,String kanaladi){
         this.kanalid = kanalid;
         this.kanaladi = kanaladi;
     }
 
-    public Channel(String kanaladi) {
-        this.kanaladi = kanaladi;
-    }
-    
 
     public int getKanalid() {
         return kanalid;
@@ -45,6 +45,28 @@ public class Channel implements Serializable {
 
     public void setKanaladi(String kanaladi) {
         this.kanaladi = kanaladi;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + this.kanalid;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Channel other = (Channel) obj;
+        return this.kanalid == other.kanalid;
     }
     
     

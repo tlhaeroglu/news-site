@@ -19,7 +19,7 @@
         
         
         <h1>
-            Kullanıcı İşlemleri 
+            Haber İşlemleri
         </h1>
 
         
@@ -34,7 +34,10 @@
                 <f:selectItems value="#{categoryController.getCategorys()}" var="c" itemValue="#{c}" itemLabel="#{c.kategoriadi}" />
             </h:selectOneMenu> <br />
             sehirid <h:inputText value="#{haberController.haber.sehirid}" /><br />
-            kanalid <h:inputText value="#{haberController.haber.kanalid}" /><br />
+            kanal
+            <h:selectOneMenu value="#{haberController.haber.channel}" converter="channelConverter"> 
+                <f:selectItems value="#{channelController.getChannels()}" var="c" itemValue="#{c}" itemLabel="#{c.kanaladi}" />
+            </h:selectOneMenu> <br />
             <h:commandButton rendered="#{haberController.haber.haberid==0}" action="#{haberController.create()}" value="Create" />
             <h:commandButton rendered="#{haberController.haber.haberid!=0}" action="#{haberController.update()}" value="Update" />
         </h:form>
@@ -77,7 +80,7 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header"> kanalid</f:facet>
-                    <h:outputText value="#{h.kanalid}"/>  
+                    <h:outputText value="#{h.channel.kanaladi}"/>  
                 </h:column>
                 
                 <h:column>

@@ -25,6 +25,7 @@ public class ChannelController implements Serializable {
     }
     
     
+    
     public Channel getChannel(){
         if(channel == null){
             channel = new Channel();

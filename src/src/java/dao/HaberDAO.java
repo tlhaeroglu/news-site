@@ -53,7 +53,7 @@ public class HaberDAO extends DBConnection{
             st.setInt(4, haber.getUserid());
             st.setInt(5, haber.getCategory().getKategoriid());
             st.setInt(6, haber.getSehirid());
-            st.setInt(7, haber.getKanalid());
+            st.setInt(7, haber.getChannel().getKanalid());
             st.setInt(8, haber.getHaberid());
             
 
@@ -80,7 +80,7 @@ public class HaberDAO extends DBConnection{
             st.setInt(4, haber.getUserid());
             st.setInt(5, haber.getCategory().getKategoriid());
             st.setInt(6, haber.getSehirid());
-            st.setInt(7, haber.getKanalid());
+            st.setInt(7, haber.getChannel().getKanalid());
    
             st.executeUpdate();
         } catch (Exception e){
@@ -102,6 +102,7 @@ public class HaberDAO extends DBConnection{
             
             OkuyucuDAO okuyucudao = new OkuyucuDAO();
             CategoryDAO categorydao = new CategoryDAO();
+            ChannelDAO channeldao = new ChannelDAO();
             
              while(rs.next()){
              list.add(new Haber(
@@ -109,7 +110,7 @@ public class HaberDAO extends DBConnection{
                      rs.getInt("userid"),
                      categorydao.findByID(rs.getInt("kategoriid")),
                      rs.getInt("sehirid"),
-                     rs.getInt("kanalid"),
+                     channeldao.findById(rs.getInt("kanalid")),
                      rs.getString("baslik"),
                      rs.getString("imgurl"),
                      rs.getString("icerik"),
