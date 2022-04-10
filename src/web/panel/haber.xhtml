@@ -89,6 +89,12 @@
                          <div> #{haberController.getUsername(o.userid)} </div>
                      </ui:repeat>
                 </h:column>
+                <h:column>
+                    <f:facet name="header"> Yorumlar</f:facet>
+                     <ui:repeat value="#{h.yorumlar}" var="y">
+                         <div> #{haberController.getYorumicerik(y.yorumid)} </div>
+                     </ui:repeat>
+                </h:column>
                 
                 <h:column>
                     <f:facet name="header">YONET</f:facet>

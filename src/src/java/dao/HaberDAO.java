@@ -103,6 +103,7 @@ public class HaberDAO extends DBConnection{
             OkuyucuDAO okuyucudao = new OkuyucuDAO();
             CategoryDAO categorydao = new CategoryDAO();
             ChannelDAO channeldao = new ChannelDAO();
+            YorumDao yorumdao = new YorumDao();
             
              while(rs.next()){
              list.add(new Haber(
@@ -115,7 +116,8 @@ public class HaberDAO extends DBConnection{
                      rs.getString("imgurl"),
                      rs.getString("icerik"),
                      rs.getDate("haberTarihi"),
-                     okuyucudao.findById(rs.getInt("haberid"))
+                     okuyucudao.findById(rs.getInt("haberid")),
+                     yorumdao.findById(rs.getInt("yorumid"))
              ));
              
          }
@@ -149,4 +151,27 @@ public class HaberDAO extends DBConnection{
         
         return username;
     }
+    
+    public String getYorumicerik(int id){
+        String icerik = "";
+        try {
+            Connection c = this.connect();
+
+            String query = "SELECT icerik from yorum where yorumid="+id;
+            Statement st = c.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+            
+            while(rs.next()){
+             icerik = rs.getString("icerik");
+             
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return icerik;
+    }
+    
 }

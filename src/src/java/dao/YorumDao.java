@@ -6,6 +6,7 @@ package dao;
 
 import entity.Yorum;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -96,5 +97,33 @@ public class YorumDao extends DBConnection{
 
         return list;
     }
+
+    public List<Yorum> findById(int id) {
+        List<Yorum> list = new ArrayList<>();
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "SELECT * from yorum where haberid="+id;
+
+            ResultSet rs = st.executeQuery(query);
+             while(rs.next()){
+             list.add(new Yorum(
+                     rs.getInt("yorumid"),
+                     rs.getInt("haberid"),
+                     rs.getInt("userid"),
+                     rs.getString("icerik"),
+                     rs.getDate("yorumTarihi")
+             ));
+         }
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return list;
+    }
+
+    
     
 }

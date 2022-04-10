@@ -32,6 +32,7 @@ public class Haber {
     private String baslik, imgurl, icerik;
     private Date haberTarihi;
     private List<Okuyucu> okuyucular;
+    private List<Yorum> yorumlar;
 
     public Haber() {
     }
@@ -46,7 +47,7 @@ public class Haber {
         this.icerik = icerik;
     }
 
-    public Haber(int haberid, int userid, Category category, int sehirid, Channel channel, String baslik, String imgurl, String icerik, Date haberTarihi, List<Okuyucu> okuyucular) {
+    public Haber(int haberid, int userid, Category category, int sehirid, Channel channel, String baslik, String imgurl, String icerik, Date haberTarihi, List<Okuyucu> okuyucular, List<Yorum> yorumlar) {
         this.haberid = haberid;
         this.userid = userid;
         this.category = category;
@@ -57,6 +58,7 @@ public class Haber {
         this.icerik = icerik;
         this.haberTarihi = haberTarihi;
         this.okuyucular = okuyucular;
+        this.yorumlar = yorumlar;
     }
 
 
@@ -148,6 +150,15 @@ public class Haber {
     public int getOkuyucuSayisi(){
         return okuyucular.size();
     }
+
+    public List<Yorum> getYorumlar() {
+        return yorumlar;
+    }
+
+    public void setYorumlar(List<Yorum> yorumlar) {
+        this.yorumlar = yorumlar;
+    }
+    
     
     
     
