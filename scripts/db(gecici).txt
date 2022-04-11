@@ -1,0 +1,88 @@
+/*  dbname = news */
+
+CREATE TABLE users(
+	userid serial primary key not null,
+	ad varchar(30) not null,
+	soyad varchar(30),
+	nickname varchar(30) unique not null,
+	sifre varchar(30) not null,
+	isAdmin boolean default false,
+	kayitTarihi timestamp default CURRENT_TIMESTAMP
+);
+
+insert into users (ad,soyad,nickname,sifre) values('user1','user1S','userxx','danger');
+insert into users (ad,soyad,nickname,sifre) values('user2','user2sS','useryy','warning');
+select * from users;
+
+CREATE TABLE kategori(
+	kategoriid serial primary key,
+	kategoriadi varchar(30)
+);
+
+insert into kategori (kategoriadi) values ('Bilim'), ('Teknoloji'), ('Gündem');
+select * from kategori;
+
+CREATE TABLE sehir(
+	sehirid serial primary key,
+	sehiradi varchar(30)
+);
+
+insert into sehir (sehiradi) values ('Malatya'), ('Ağrı'), ('Adana');
+select * from sehir;
+
+CREATE TABLE kanal(
+	kanalid serial primary key,
+	kanaladi varchar(30)
+);
+
+insert into kanal (kanaladi) values ('Kafadarlar'), ('HaberTurk'), ('CNN');
+select * from kanal;
+
+
+CREATE TABLE haber(
+	haberid serial primary key,
+	baslik varchar(30),
+	imgurl varchar(50) default null,
+	icerik varchar(2000) not null,
+	haberTarihi timestamp default CURRENT_TIMESTAMP,
+	userid integer references users(userid),
+	kategoriid integer references kategori(kategoriid),
+	kanalid integer references kanal(kanalid)
+);
+
+insert into haber (baslik,imgurl,icerik,userid,kategoriid,sehirid,kanalid) values
+	('Haber 1','','AJSDahnsdjkas aksdjnjaksndjaks asj jkdsand askdjnaskdn jkaaksdnjjaksd',1,1,1,1),
+	('Haber 2','','AJSDahnsdjkas aksdjnjaksndjaks asj jkdsand askdjnaskdn jkaaksdnjjaksd',2,2,2,2),
+	('Haber 3','','AJSDahnsdjkas aksdjnjaksndjaks asj jkdsand askdjnaskdn jkaaksdnjjaksd',1,2,2,1);
+select * from haber;
+
+CREATE TABLE okuyucu(
+	userid integer references users(userid),
+	haberid integer references haber(haberid)
+);
+
+insert into okuyucu (userid, haberid) values (1,2), (2,1);
+select * from okuyucu;
+
+CREATE TABLE yorum(
+	yorumid serial primary key,
+	userid integer references users(userid),
+	haberid integer references haber(haberid),
+	icerik varchar(1000) not null,
+	yorumTarihi timestamp default CURRENT_TIMESTAMP
+);
+
+insert into yorum (userid,haberid,icerik) values (2,2, 'Çok güzel'), (1,2, 'Haklısın');
+select * from yorum;
+
+
+create table haber_sehir(
+	haberid integer references haber(haberid),
+	sehirid integer references sehir(sehirid)
+);
+
+insert into haber_sehir (haberid,sehirid) values (1,1),(1,2);
+select * from haber_sehir;
+
+
+
