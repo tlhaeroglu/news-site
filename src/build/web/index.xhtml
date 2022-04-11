@@ -5,43 +5,12 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
-        <title>News Site</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"></link>
-        <h:outputStylesheet library="css" name = "style.css" /> 
+        <title>News Site</title> 
 
     </h:head>
     <h:body>
 
-        <h:form>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <h:commandLink class="navbar-brand" action="/" value="NewSite" />
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <h:commandLink class="nav-link" action="/panel/haber" value="Haber" />
-                        </li>
-                        <li class="nav-item">
-                            <h:commandLink class="nav-link"  action="/panel/channel" value="Kanal" />
-                        </li>
-                        <li class="nav-item">
-                            <h:commandLink class="nav-link"  action="/panel/city" value="Şehir" />
-                        </li>
-                        <li class="nav-item">
-                            <h:commandLink class="nav-link"  action="/panel/user" value="Kullanıcı" />
-                        </li>
-                        <li class="nav-item">
-                            <h:commandLink class="nav-link"  action="/panel/category" value="Kategori" />
-                        </li> 
-                        <li class="nav-item">
-                            <h:commandLink class="nav-link"  action="/panel/yorum" value="Yorum" />
-                        </li> 
-                    </ul>
-                </div>
-            </nav>  
-        </h:form>
+        <ui:include src="partials/nav.xhtml" />
 
         <div class="container">
             <div class="row">
@@ -53,22 +22,32 @@
                             <div class="h-wrap">
                                 <h3 class="h3"> #{h.baslik} </h3>
                                 <div class="author"> 
-                                    <span>#{haberController.getUsername(h.userid)}</span> 
+                                    <span><strong> Yayıncı: </strong> #{haberController.getUsername(h.userid)}</span> 
+
+                                    <span class="text-muted"> Okuyan kişi sayısı: #{h.getOkuyucuSayisi()} </span>
+                                    <span class="tarih">#{h.haberTarihi}</span>
                                 </div>
                                 <h:graphicImage library="images" name="example.jpg" class="img-fluid"></h:graphicImage>
-                                    <p class="icerik"> #{h.icerik}</p>
+                                <p class="icerik"> #{h.icerik}</p>
 
 
-                                    <div class="info">
-                                        <span class="cat"> #{h.category.kategoriadi} </span>
-                                        <div class="city"> 
-                                            <ui:repeat value="#{h.cities}" var="c">
-                                                <span> #{c.sehiradi} </span>
-                                            </ui:repeat>
-                                        </div>
-                                        <span class="ch"> #{h.channel.kanaladi} </span>
+                                <div class="info">
+                                    <span class="cat"> #{h.category.kategoriadi} </span>
+                                    <div class="city"> 
+                                        <ui:repeat value="#{h.cities}" var="c">
+                                            <span> #{c.sehiradi} </span>
+                                        </ui:repeat>
                                     </div>
-                                    <p class="tarih"><span>#{h.haberTarihi}</span></p>
+                                    <span class="ch"> #{h.channel.kanaladi} </span>
+                                </div>
+
+                                <div class="comments">
+                                    <div class="h5">Yorumlar: </div>
+                                    <ui:repeat value="#{h.yorumlar}" var="y">
+                                        <div class="comment"> <strong>#{haberController.getUsername(y.userid)}: </strong> #{y.icerik} </div>
+                                        <div class="commentdate"> #{y.yorumTarihi} </div>
+                                    </ui:repeat>
+                                </div>
                             </div>
                         </div>
 

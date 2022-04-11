@@ -79,6 +79,8 @@ public class HaberController implements Serializable {
         return this.getHaberDAO().getUsername(id);
     }
     
+  
+    
    
     
 }

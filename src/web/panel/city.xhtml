@@ -2,24 +2,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head>
         <title>City's</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:commandButton action="/panel/haber" value="Haber" />
-            <h:commandButton action="/panel/channel" value="Kanal" />
-            <h:commandButton action="/panel/city" value="Şehir" />
-            <h:commandButton action="/panel/user" value="Kullanıcı" />
-            <h:commandButton action="/panel/category" value="Kategori" />
-            <h:commandButton action="/panel/yorum" value="Yorum" />
-        </h:form>
-        
-        <h1> Şehir İşlemleri </h1>
-            
+        <ui:include src="../partials/nav.xhtml" />
+
+        <div class="container myform" >
+            <h1> Şehir İşlemleri </h1>
             <h:form>
-                <h:dataTable border="1" value="#{cityController.getCities()}" var="s">
+                Sehir Adi <h:inputText value="#{cityController.city.sehiradi}" /><br />
+                <h:commandButton rendered="#{cityController.city.sehirid==0}" action="#{cityController.createCity()}" value="Create" />
+                <h:commandButton rendered="#{cityController.city.sehirid!=0}" action="#{cityController.updateCity()}" value="Update" />
+            </h:form>
+        </div>
+
+        <h:form>
+            <h:dataTable class="table table-dark table-hover table-striped" value="#{cityController.getCities()}" var="s">
                 <h:column>
                     <f:facet name="header"> Sehir ID</f:facet>
                     <h:outputText value="#{s.sehirid}"/>  
@@ -31,17 +32,13 @@
 
                 <h:column>
                     <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{cityController.deleteCity(s)}" value="X" />
-                    <h:commandButton action="#{cityController.setCity(s)}" value="Edit" />
+                    <h:commandButton class="btn btn-danger" action="#{cityController.deleteCity(s)}" value="X" />
+                    <h:commandButton class="btn btn-success" action="#{cityController.setCity(s)}" value="Edit" />
                 </h:column>
 
             </h:dataTable>
-            </h:form>
+        </h:form>
 
-            <h:form>
-                Sehir Adi <h:inputText value="#{cityController.city.sehiradi}" /><br />
-                <h:commandButton rendered="#{cityController.city.sehirid==0}" action="#{cityController.createCity()}" value="Create" />
-                <h:commandButton rendered="#{cityController.city.sehirid!=0}" action="#{cityController.updateCity()}" value="Update" />
-            </h:form>
+
     </h:body>
 </html>

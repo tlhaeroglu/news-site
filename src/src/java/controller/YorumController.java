@@ -37,6 +37,9 @@ public class YorumController implements Serializable {
     }
 
     public YorumDao getYorumDao() {
+        if(this.yorumDao == null){
+            yorumDao = new YorumDao();
+        }
         return yorumDao;
     }
 
@@ -58,10 +61,10 @@ public class YorumController implements Serializable {
     
     
     public void create(){
-        yorumDao = new YorumDao();
-        yorumDao.create(this.yorum);
+        getYorumDao().create(this.yorum);
         yorum = new Yorum();
     }
+    
     
     public void delete(Yorum yorum){
         yorumDao.delete(yorum);

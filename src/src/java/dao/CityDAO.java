@@ -105,14 +105,14 @@ public class CityDAO extends DBConnection {
             Connection c = this.connect();
 
             Statement st = c.createStatement();
-            String query = "SELECT * from haber_sehir where haberid = "+id;
+            String query = "select * from sehir where sehirid in (select sehirid from haber_sehir where haberid ="+id+")";
 
             ResultSet rs = st.executeQuery(query);
             
              while(rs.next()){
              cities.add( new City(
-                     rs.getInt(1),
-                     rs.getString(2)
+                     rs.getInt("sehirid"),
+                     rs.getString("sehiradi")
              ));
          }
             

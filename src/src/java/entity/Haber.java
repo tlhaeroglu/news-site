@@ -95,7 +95,6 @@ public class Haber {
     }
 
 
-
     public Channel getChannel() {
         return channel;
     }
@@ -103,8 +102,6 @@ public class Haber {
     public void setChannel(Channel channel) {
         this.channel = channel;
     }
-
-   
 
 
     public String getBaslik() {

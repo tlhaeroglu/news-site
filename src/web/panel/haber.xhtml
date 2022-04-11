@@ -8,46 +8,38 @@
         <title>Haber's</title>
     </h:head>
     <h:body>
-        <h:form>
-            <h:commandButton action="/panel/haber" value="Haber" />
-            <h:commandButton action="/panel/channel" value="Kanal" />
-            <h:commandButton action="/panel/city" value="Şehir" />
-            <h:commandButton action="/panel/user" value="Kullanıcı" />
-            <h:commandButton action="/panel/category" value="Kategori" />
-            <h:commandButton action="/panel/yorum" value="Yorum" />
-        </h:form>
+        <ui:include src="../partials/nav.xhtml" />
         
         
-        <h1>
+        <div class="container myform">
+            <h1>
             Haber İşlemleri
         </h1>
-
         
         <h:form>
-            Başlık: <h:inputText value="#{haberController.haber.baslik}" /><br />
-            ImgURL <h:inputText value="#{haberController.haber.imgurl}"  /><br />
-            İçerik: <h:inputText value="#{haberController.haber.icerik}"  /><br />
-            userid <h:inputText value="#{haberController.haber.userid}" /><br />
-            kategori
-            <h:selectOneMenu value="#{haberController.haber.category}" converter="categoryConverter"> 
-                <f:selectItems value="#{categoryController.getCategorys()}" var="c" itemValue="#{c}" itemLabel="#{c.kategoriadi}" />
-            </h:selectOneMenu> <br />
-            Sehirler
-            <h:selectManyMenu  value="#{haberController.haber.cities}" converter="cityConverter"> 
-                <f:selectItems value="#{cityController.getCities()}" var="s" itemValue="#{s}" itemLabel="#{s.sehiradi}" />
-            </h:selectManyMenu> <br />
-            kanal
-            <h:selectOneMenu value="#{haberController.haber.channel}" converter="channelConverter"> 
-                <f:selectItems value="#{channelController.getChannels()}" var="k" itemValue="#{k}" itemLabel="#{k.kanaladi}" />
-            </h:selectOneMenu> <br />
-            <h:commandButton rendered="#{haberController.haber.haberid==0}" action="#{haberController.create()}" value="Create" />
-            <h:commandButton rendered="#{haberController.haber.haberid!=0}" action="#{haberController.update()}" value="Update" />
-        </h:form>
+                Başlık: <h:inputText value="#{haberController.haber.baslik}" />
+                ImgURL <h:inputText value="#{haberController.haber.imgurl}"  />
+                İçerik: <h:inputText value="#{haberController.haber.icerik}"  />
+                userid <h:inputText value="#{haberController.haber.userid}" />
+                kategori
+                <h:selectOneMenu value="#{haberController.haber.category}" converter="categoryConverter"> 
+                    <f:selectItems value="#{categoryController.getCategorys()}" var="c" itemValue="#{c}" itemLabel="#{c.kategoriadi}" />
+                </h:selectOneMenu>
+                Sehirler
+                <h:selectManyMenu  value="#{haberController.haber.cities}" converter="cityConverter"> 
+                    <f:selectItems value="#{cityController.getCities()}" var="s" itemValue="#{s}" itemLabel="#{s.sehiradi}" />
+                </h:selectManyMenu> 
+                kanal
+                <h:selectOneMenu value="#{haberController.haber.channel}" converter="channelConverter"> 
+                    <f:selectItems value="#{channelController.getChannels()}" var="k" itemValue="#{k}" itemLabel="#{k.kanaladi}" />
+                </h:selectOneMenu> <br></br>
+                <h:commandButton rendered="#{haberController.haber.haberid==0}" action="#{haberController.create()}" value="Create" />
+                <h:commandButton rendered="#{haberController.haber.haberid!=0}" action="#{haberController.update()}" value="Update" />
+            </h:form>
+        </div>
 
-        <br></br>
         <h:form>
-
-            <h:dataTable border="1" value="#{haberController.list()}" var="h">
+            <h:dataTable class="table table-dark table-hover table-striped" value="#{haberController.list()}" var="h">
                 <h:column>
                     <f:facet name="header"> ID </f:facet>
                     <h:outputText value="#{h.haberid}"/>  
@@ -102,11 +94,14 @@
                 
                 <h:column>
                     <f:facet name="header">YONET</f:facet>
-                    <h:commandButton action="#{haberController.delete(h)}" value="X" />
-                    <h:commandButton action="#{haberController.setHaber(h)}" value="Edit" />
+                    <h:commandButton class="btn btn-danger w-100" action="#{haberController.delete(h)}" value="X" />
+                    <h:commandButton class="btn btn-success w-100" action="#{haberController.setHaber(h)}" value="Edit" />
                 </h:column>
             </h:dataTable>
             </h:form>
+        
+        
+            
     </h:body>
 </html>
 
