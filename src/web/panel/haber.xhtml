@@ -9,14 +9,14 @@
     </h:head>
     <h:body>
         <ui:include src="../partials/nav.xhtml" />
-        
-        
+
+
         <div class="container myform">
             <h1>
-            Haber İşlemleri
-        </h1>
-        
-        <h:form>
+                Haber İşlemleri
+            </h1>
+
+            <h:form>
                 Başlık: <h:inputText value="#{haberController.haber.baslik}" />
                 ImgURL <h:inputText value="#{haberController.haber.imgurl}"  />
                 İçerik: <h:inputText value="#{haberController.haber.icerik}"  />
@@ -39,7 +39,8 @@
         </div>
 
         <h:form>
-            <h:dataTable class="table table-dark table-hover table-striped" value="#{haberController.list()}" var="h">
+
+            <h:dataTable class="table table-dark table-hover table-striped" value="#{haberController.getHaberler()}" var="h">
                 <h:column>
                     <f:facet name="header"> ID </f:facet>
                     <h:outputText value="#{h.haberid}"/>  
@@ -78,30 +79,42 @@
                     <f:facet name="header"> kanalid</f:facet>
                     <h:outputText value="#{h.channel.kanaladi}"/>  
                 </h:column>
-                
+
                 <h:column>
                     <f:facet name="header"> Okuyucular</f:facet>
-                     <ui:repeat value="#{h.okuyucular}" var="o">
-                         <div> #{haberController.getUsername(o.userid)} </div>
-                     </ui:repeat>
+                    <ui:repeat value="#{h.okuyucular}" var="o">
+                        <div> #{haberController.getUsername(o.userid)} </div>
+                    </ui:repeat>
                 </h:column>
                 <h:column>
                     <f:facet name="header"> Yorumlar</f:facet>
-                     <ui:repeat value="#{h.yorumlar}" var="y">
-                         <div> #{y.icerik} </div>
-                     </ui:repeat>
+                    <ui:repeat value="#{h.yorumlar}" var="y">
+                        <div> #{y.icerik} </div>
+                    </ui:repeat>
                 </h:column>
-                
+
                 <h:column>
                     <f:facet name="header">YONET</f:facet>
                     <h:commandButton class="btn btn-danger w-100" action="#{haberController.delete(h)}" value="X" />
                     <h:commandButton class="btn btn-success w-100" action="#{haberController.setHaber(h)}" value="Edit" />
                 </h:column>
             </h:dataTable>
-            </h:form>
-        
-        
-            
+
+            <center><p>
+                    <div>
+                        <h:commandButton action="#{haberController.previous()}" class="btn btn-secondary" value="Önceki"/>
+                        <br1></br1>
+                        <br1></br1>
+                        <br1></br1>
+                        <h:commandButton action="#{haberController.next()}" class="btn btn-secondary" value="Sonraki"/>
+                    </div>
+                </p></center>
+
+
+        </h:form>
+
+
+
     </h:body>
 </html>
 

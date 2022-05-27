@@ -22,11 +22,53 @@ public class HaberController implements Serializable {
     private List<Haber> haberler;
     private HaberDAO haberDAO;
     private Haber haber; 
+    private int page =1;
+    private int pageSize=3;
+    private int pageCount;
+
+    
+     
+    public void next(){
+        this.page++;
+    }
+    public void previous(){
+        this.page--;
+    }
+    
+    
+    public int getPage() {
+        return page;
+    }
+
+    public void setPage(int page) {
+        this.page = page;
+    }
+
+    public int getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getPageCount() {
+        this.pageCount = (int) Math.ceil(this.getHaberDAO().count()/(double)pageSize); 
+        return pageCount;
+    }
+
+    public void setPageCount(int pageCount) {
+        this.pageCount = pageCount;
+    }
+    
+    
+    
     
     public HaberController() {
     }
 
     public List<Haber> getHaberler() {
+        this.haberler = this.getHaberDAO().findAll(page,pageSize);
         return haberler;
     }
 

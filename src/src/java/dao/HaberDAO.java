@@ -179,5 +179,68 @@ public class HaberDAO extends DBConnection {
         return username;
     }
 
+    public List<Haber> findAll(int page, int pageSize) {
+        List<Haber> list = new ArrayList<>();
+        //..page = 1
+        //..pageSize = 3;
+        int start = (page-1)*pageSize;
+        int strt = 1;
+        int pages = 3;
+
+        try {
+            Connection c = this.connect();
+
+            String query = "SELECT * from haber order by haberid asc limit "+pageSize+" offset "+start;
+            Statement st = c.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+
+            OkuyucuDAO okuyucudao = new OkuyucuDAO();
+            CategoryDAO categorydao = new CategoryDAO();
+            ChannelDAO channeldao = new ChannelDAO();
+            YorumDao yorumdao = new YorumDao();
+            CityDAO citydao = new CityDAO();
+  
+            while (rs.next()) {
+                list.add(new Haber(
+                        rs.getInt("haberid"),
+                        rs.getInt("userid"),
+                        categorydao.findByID(rs.getInt("kategoriid")),
+                        citydao.findById(rs.getInt("haberid")),
+                        channeldao.findById(rs.getInt("kanalid")),
+                        rs.getString("baslik"),
+                        rs.getString("imgurl"),
+                        rs.getString("icerik"),
+                        rs.getDate("haberTarihi"),
+                        okuyucudao.findById(rs.getInt("haberid")),
+                        yorumdao.findById(rs.getInt("haberid"))
+                ));
+
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+        
+    }
+    
+    public int count(){
+        int count = 0;
+        try{
+            Connection c = this.connect();
+
+            String query = "SELECT count(haber) as haber_count from";
+            Statement st = c.createStatement();
+
+            ResultSet rs = st.executeQuery(query);
+            count = rs.getInt("haber_count");
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return count;
+    }
+
 
 }
