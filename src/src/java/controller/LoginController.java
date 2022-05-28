@@ -65,7 +65,7 @@ public class LoginController implements Serializable {
         }
         return true;
     }
-      public boolean validatePassword(FacesContext context,UIComponent cmp,Object value) throws ValidatorException{
+    public boolean validatePassword(FacesContext context,UIComponent cmp,Object value) throws ValidatorException{
         String val = (String) value;
         
         if(val.isEmpty()){

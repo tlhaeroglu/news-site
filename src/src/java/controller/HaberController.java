@@ -32,7 +32,9 @@ public class HaberController implements Serializable {
         this.page++;
     }
     public void previous(){
-        this.page--;
+        if(page != 1){
+            this.page--;
+        }
     }
     
     
