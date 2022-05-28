@@ -16,29 +16,51 @@
                 Haber İşlemleri
             </h1>
 
-            <h:form>
-                Başlık: <h:inputText value="#{haberController.haber.baslik}" />
-                ImgURL <h:inputText value="#{haberController.haber.imgurl}"  />
-                İçerik: <h:inputText value="#{haberController.haber.icerik}"  />
-                userid <h:inputText value="#{haberController.haber.userid}" />
-                kategori
-                <h:selectOneMenu value="#{haberController.haber.category}" converter="categoryConverter"> 
-                    <f:selectItems value="#{categoryController.getCategorys()}" var="c" itemValue="#{c}" itemLabel="#{c.kategoriadi}" />
-                </h:selectOneMenu>
-                Sehirler
-                <h:selectManyMenu  value="#{haberController.haber.cities}" converter="cityConverter"> 
-                    <f:selectItems value="#{cityController.getCities()}" var="s" itemValue="#{s}" itemLabel="#{s.sehiradi}" />
-                </h:selectManyMenu> 
-                kanal
-                <h:selectOneMenu value="#{haberController.haber.channel}" converter="channelConverter"> 
-                    <f:selectItems value="#{channelController.getChannels()}" var="k" itemValue="#{k}" itemLabel="#{k.kanaladi}" />
-                </h:selectOneMenu> <br></br>
-                <h:commandButton rendered="#{haberController.haber.haberid==0}" action="#{haberController.create()}" value="Create" />
-                <h:commandButton rendered="#{haberController.haber.haberid!=0}" action="#{haberController.update()}" value="Update" />
+            <h:form  id="haber-form">
+                <div>Başlık: <h:inputText value="#{haberController.haber.baslik}" /></div>
+                <p></p>
+                <div>ImgURL: <h:inputText value="#{haberController.haber.imgurl}" /></div>
+                <p></p>
+                <div>İçerik: <h:inputText value="#{haberController.haber.icerik}"  /></div>
+                <p></p>
+                <div>Userid : <h:inputText value="#{haberController.haber.userid}" /></div>
+                <p></p>
+                <div>
+                    Kategori :
+                    <h:selectOneMenu value="#{haberController.haber.category}" converter="categoryConverter"> 
+                        <f:selectItems value="#{categoryController.getCategorys()}" var="c" itemValue="#{c}" itemLabel="#{c.kategoriadi}" />
+                    </h:selectOneMenu>
+                </div>
+                <p></p>
+                <div align="center">
+                    Sehirler :
+                    <h:selectManyMenu  value="#{haberController.haber.cities}" converter="cityConverter"> 
+                        <f:selectItems value="#{cityController.getCities()}" var="s" itemValue="#{s}" itemLabel="#{s.sehiradi}" />
+                    </h:selectManyMenu> 
+                </div>
+                <p></p>
+                <div>
+                    Kanal :
+                    <h:selectOneMenu value="#{haberController.haber.channel}" converter="channelConverter"> 
+                        <f:selectItems value="#{channelController.getChannels()}" var="k" itemValue="#{k}" itemLabel="#{k.kanaladi}" />
+                    </h:selectOneMenu>
+                </div>
+                <p></p>
+                <div>
+                    <h:commandButton rendered="#{haberController.haber.haberid==0}" action="#{haberController.create()}" value="Create">
+                        <f:ajax execute="haber-form" render="haber-table haber-form"/>
+                    </h:commandButton>
+                    <h:commandButton rendered="#{haberController.haber.haberid!=0}" action="#{haberController.update()}" value="Update">
+                        <f:ajax execute="haber-form" render="haber-table haber-form"/>
+                    </h:commandButton>
+                </div>
+
+
             </h:form>
         </div>
 
-        <h:form>
+
+        <h:form id="haber-table">
 
             <h:dataTable class="table table-dark table-hover table-striped" value="#{haberController.getHaberler()}" var="h">
                 <h:column>
@@ -95,18 +117,32 @@
 
                 <h:column>
                     <f:facet name="header">YONET</f:facet>
-                    <h:commandButton class="btn btn-danger w-100" action="#{haberController.delete(h)}" value="X" />
-                    <h:commandButton class="btn btn-success w-100" action="#{haberController.setHaber(h)}" value="Edit" />
+                    <h:commandButton class="btn btn-danger w-100" action="#{haberController.delete(h)}" value="X">
+                        <f:ajax execute="haber-table" render="haber-table haber-form"/>
+                    </h:commandButton>
+                    <h:commandButton class="btn btn-success w-100" action="#{haberController.setHaber(h)}" value="Edit">
+                        <f:ajax execute="haber-table" render="haber-table haber-form"/>
+                    </h:commandButton>
+
                 </h:column>
+
+                <div class="btn btn-secondary">
+
+                </div>
+
             </h:dataTable>
 
             <center><p>
                     <div>
-                        <h:commandButton action="#{haberController.previous()}" class="btn btn-secondary" value="Önceki"/>
+                        <h:commandButton action="#{haberController.previous()}" class="btn btn-secondary" value="Önceki">
+                            <f:ajax execute="haber-table" render="haber-table haber-form"/>
+                        </h:commandButton>
                         <br1></br1>
                         <br1></br1>
                         <br1></br1>
-                        <h:commandButton action="#{haberController.next()}" class="btn btn-secondary" value="Sonraki"/>
+                        <h:commandButton action="#{haberController.next()}" class="btn btn-secondary" value="Sonraki">
+                            <f:ajax execute="haber-table" render="haber-table haber-form"/>
+                        </h:commandButton>
                     </div>
                 </p></center>
 
