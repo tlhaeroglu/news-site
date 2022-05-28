@@ -17,19 +17,16 @@
             </h1>
 
 
-            <h:form rendered="#{validUser == null}">
-                Nickname: <h:inputText value="#{loginController.user.username}"  />
-                Şifre: <h:inputText value="#{loginController.user.password}" /><br />
+            
+            <h:form>
+                Nickname <h:inputText id="nickname" validator="#{loginController.validateNickname}" value="#{loginController.user.nickname}" />
+                <h:message for="nickname" style="color: red;font-size: 10pt;"/>
+                Şifre <h:inputText id="password" validator="#{loginController.validatePassword}" value="#{loginController.user.sifre}" />
+                <h:message for="password" style="color: red;font-size: 10pt;"/><br></br>
                 <h:commandButton action="#{loginController.login()}" value="Giriş Yap" />
             </h:form>
-            <h:form rendered="#{validUser != null}">
-                Nickname: <h:inputText value="#{validUser.username}"  />
-                Şifre: <h:inputText value="#{validUser.password}" /><br />
-            </h:form>
         </div>
-        <center><p>
-                <h:messages></h:messages>
-            </p></center>
+        
 
 
     </h:body>

@@ -97,4 +97,24 @@ public class UserDAO extends DBConnection  {
         
         return list;
    } 
+
+ 
+   
+    public boolean control(String val) {
+        try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "select * from users where ad = "+val;
+
+            ResultSet rs = st.executeQuery(query);
+            System.out.println("---------rs: "+rs);
+                        
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
 }
+
+

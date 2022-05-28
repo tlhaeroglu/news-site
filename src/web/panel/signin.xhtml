@@ -18,7 +18,7 @@
 
 
             <h:form>
-                Ad: <h:inputText id="name" validator="#{signinController.validateName}" value="#{signinController.user.ad}" />
+                Ad <h:inputText id="name" validator="#{signinController.validateName}" value="#{signinController.user.ad}" />
                 <h:message for="name" style="color: red;font-size: 10pt;"/>
                 Soyad <h:inputText id="surname" validator="#{signinController.validateSurname}" value="#{signinController.user.soyad}" />
                 <h:message for="surname" style="color: red;font-size: 10pt;"/>
