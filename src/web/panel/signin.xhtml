@@ -18,11 +18,15 @@
 
 
             <h:form>
-                Ad: <h:inputText value="#{loginController.user.ad}" />
-                Soyad: <h:inputText value="#{loginController.user.soyad}"  />
-                Nickname: <h:inputText value="#{loginController.user.username}"  />
-                Sifre: <h:inputText value="#{loginController.user.password}" /><br />
-                <h:commandButton action="#{loginController.login()}" value="Giriş Yap" />
+                Ad: <h:inputText id="name" validator="#{signinController.validateName}" value="#{signinController.user.ad}" />
+                <h:message for="name" style="color: red;font-size: 10pt;"/>
+                Soyad <h:inputText id="surname" validator="#{signinController.validateSurname}" value="#{signinController.user.soyad}" />
+                <h:message for="surname" style="color: red;font-size: 10pt;"/>
+                Nickname <h:inputText id="nickname" validator="#{signinController.validateNickname}" value="#{signinController.user.nickname}" />
+                <h:message for="nickname" style="color: red;font-size: 10pt;"/>
+                Şifre <h:inputText id="password" validator="#{signinController.validatePassword}" value="#{signinController.user.sifre}" />
+                <h:message for="password" style="color: red;font-size: 10pt;"/><br></br>
+                <h:commandButton action="#{signinController.reqister()}" value="Giriş Yap" />
             </h:form>
         </div>
 

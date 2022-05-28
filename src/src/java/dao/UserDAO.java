@@ -61,14 +61,6 @@ public class UserDAO extends DBConnection  {
             String sql = "insert into users (ad,soyad,nickname,sifre) values ('"+user.getAd()+
                     "', '"+user.getSoyad()+"','"+user.getNickname()+"','"+user.getSifre()+"')";
             
-            /*
-            String sql = "insert into users (ad,soyad,nickname,sifre) values (?,?,?,?)";
-            PreparedStatement st = c.prepareStatement(sql);
-           
-            st.setString(1, user.getAd());
-            st.setString(2, user.getSoyad());
-            st.setString(3, user.getNickname());
-            st.setString(4, user.getSifre());*/
 
             st.executeUpdate(sql);
         } catch (Exception e){
