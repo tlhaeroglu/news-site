@@ -18,12 +18,10 @@ import java.io.IOException;
 
 /**
  *
- * @author ademtarhan
+ * @author TALHA
  */
-
-
-@WebFilter("/*")
-public class LoginFilter implements Filter {
+/*@WebFilter("/*")
+public class AuthorizationFilter implements Filter{
 
     @Override
     public void doFilter(ServletRequest sr, ServletResponse sr1, FilterChain fc) throws IOException, ServletException {
@@ -40,8 +38,6 @@ public class LoginFilter implements Filter {
         }
         
         fc.doFilter(sr,sr1);
-        
-        
-    }
+   }
     
-}
+}*/

@@ -9,9 +9,11 @@ import entity.User;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.validator.ValidatorException;
 import jakarta.inject.Named;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -50,9 +52,11 @@ public class SiginController implements Serializable {
     }
     
     
-     public void reqister() {
+     public void reqister() throws IOException {
          this.getUserDao().create(user);
          user = new User();
+         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+         externalContext.redirect("/src/panel/login.xhtml");
      }
     
     

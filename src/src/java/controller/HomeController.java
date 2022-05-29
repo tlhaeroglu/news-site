@@ -6,13 +6,16 @@ package controller;
 
 import dao.ChannelDAO;
 import dao.CityDAO;
+import dao.HaberDAO;
 import dao.UserDAO;
 import util.DBConnection;
 import entity.User;
 import entity.Channel;
 import entity.City;
+import entity.Haber;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -20,6 +23,7 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import util.UserControl;
 
 /**
  *
@@ -27,137 +31,45 @@ import java.util.List;
  */
 @Named(value = "homeController")
 @SessionScoped
-public class HomeController implements Serializable {
-    
-    public HomeController() {
-        
+public class HomeController extends UserControl implements Serializable {
+
+    public HomeController() throws IOException {
+        this.control();
     }
 
-    private User user;
-    private UserDAO userDAO;
-    private List<User> users;
-    private List<Channel> channels;
-    private ChannelDAO channelDAO;
-    private Channel channel; 
-    private City city;
-    private CityDAO cityDAO;
-    private List<City> cities;
-    
-    public Channel getChannel(){
-        if(channel == null){
-            channel = new Channel();
+    private List<Haber> haberler;
+    private HaberDAO haberDAO;
+    private Haber haber;
+
+    public Haber getHaber() {
+        if(this.haber == null){
+            this.haber = new Haber();
         }
-        return this.channel;
+        return haber;
+    }
+
+    public void setHaber(Haber haber) {
+        this.haber = haber;
     }
     
-    public void setChannel(Channel channel){
-        this.channel = channel;
+
+    public List<Haber> list() {
+        return this.getHaberDAO().list();
     }
-    
-    public City getCity(){
-        if(city == null){
-            city = new City();
+
+    public HaberDAO getHaberDAO() {
+        if (haberDAO == null) {
+            haberDAO = new HaberDAO();
         }
-        return this.city;
-    }
-    
-    public void setCity(City city){
-        this.city = city;
-    }
-    
-   
-    public User getUser() {
-        if(user == null){
-            user = new User();
-        }
-        return user;
+        return haberDAO;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setHaberDAO(HaberDAO haberDAO) {
+        this.haberDAO = haberDAO;
     }
     
-    
-    public UserDAO getUserDAO() {
-        if(userDAO == null){
-            userDAO = new UserDAO();
-        }
-        return userDAO;
+    public String getUsername(int id) {
+        return this.getHaberDAO().getUsername(id);
     }
 
-    public void setUserDAO(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
-
-    public List<User> getUsers() {
-        users = getUserDAO().list();
-        return users;
-    }
-
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
-
-    
-    public void create(){
-        userDAO.create(this.user);
-        user = new User();
-    }
-    
-    public void createChannel(){
-        channelDAO.create(this.channel);
-        channel = new Channel();
-    }
-    
-    public void deleteChannel(Channel channel){
-        channelDAO.delete(channel);
-        
-    }
-    
-    public void createCity(){
-        cityDAO.create(this.city);
-        city = new City();
-    }
-    
-    public void deleteCity(City city){
-        cityDAO.delete(city);
-        
-    }
-    
-    public void updateCity(){
-        cityDAO.update(this.city);
-        city = new City();
-    }
-    
-    
-    
-    public void delete(User user){
-        userDAO.delete(user);
-    }
-    
-    public void update(){
-        userDAO.update(this.user);
-        user = new User();
-    }
-    
-    public void updateChannel(){
-        channelDAO.update(this.channel);
-        channel = new Channel();
-    }
-    
-    public List<User> getDatabase(){
-       userDAO = new UserDAO();
-       return  userDAO.list();
-    }
-    
-    public List<Channel> getChannels() {
-        channelDAO = new ChannelDAO();
-        return channelDAO.list();
-    }
-    
-    public List<City> getCities() {
-        cityDAO = new CityDAO();
-        return cityDAO.list();
-    }
-    
 }

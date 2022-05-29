@@ -6,10 +6,16 @@ package controller;
 
 import dao.HaberDAO;
 import entity.Haber;
+import entity.User;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import util.UserControl;
 
 /**
  *
@@ -17,27 +23,29 @@ import java.util.List;
  */
 @Named(value = "haberController")
 @SessionScoped
-public class HaberController implements Serializable {
+public class HaberController extends UserControl implements Serializable {
+
+    public HaberController(){
+        
+    }
 
     private List<Haber> haberler;
     private HaberDAO haberDAO;
-    private Haber haber; 
-    private int page =1;
-    private int pageSize=3;
+    private Haber haber;
+    private int page = 1;
+    private int pageSize = 3;
     private int pageCount;
 
-    
-     
-    public void next(){
+    public void next() {
         this.page++;
     }
-    public void previous(){
-        if(page != 1){
+
+    public void previous() {
+        if (page != 1) {
             this.page--;
         }
     }
-    
-    
+
     public int getPage() {
         return page;
     }
@@ -55,22 +63,16 @@ public class HaberController implements Serializable {
     }
 
     public int getPageCount() {
-        this.pageCount = (int) Math.ceil(this.getHaberDAO().count()/(double)pageSize); 
+        this.pageCount = (int) Math.ceil(this.getHaberDAO().count() / (double) pageSize);
         return pageCount;
     }
 
     public void setPageCount(int pageCount) {
         this.pageCount = pageCount;
     }
-    
-    
-    
-    
-    public HaberController() {
-    }
 
-    public List<Haber> getHaberler() {
-        this.haberler = this.getHaberDAO().findAll(page,pageSize);
+    public List<Haber> getHaberler() throws IOException {
+        this.haberler = this.getHaberDAO().findAll(page, pageSize);
         return haberler;
     }
 
@@ -79,7 +81,7 @@ public class HaberController implements Serializable {
     }
 
     public Haber getHaber() {
-        if(haber == null){
+        if (haber == null) {
             haber = new Haber();
         }
         return haber;
@@ -88,19 +90,19 @@ public class HaberController implements Serializable {
     public void setHaber(Haber haber) {
         this.haber = haber;
     }
-    
-    public void create(){
+
+    public void create() {
         this.getHaberDAO().create(this.haber);
         haber = new Haber();
     }
-    
-    public void update(){
+
+    public void update() {
         this.getHaberDAO().update(haber);
         haber = new Haber();
     }
 
     public HaberDAO getHaberDAO() {
-        if(haberDAO == null){
+        if (haberDAO == null) {
             haberDAO = new HaberDAO();
         }
         return haberDAO;
@@ -109,22 +111,18 @@ public class HaberController implements Serializable {
     public void setHaberDAO(HaberDAO haberDAO) {
         this.haberDAO = haberDAO;
     }
-    
-    public void delete(Haber haber){
+
+    public void delete(Haber haber) {
         this.getHaberDAO().delete(haber);
         haber = new Haber();
     }
-    
-    public List<Haber> list(){
+
+    public List<Haber> list() {
         return this.getHaberDAO().list();
     }
-    
-    public String getUsername(int id){
+
+    public String getUsername(int id) {
         return this.getHaberDAO().getUsername(id);
     }
-    
-  
-    
-   
-    
+
 }

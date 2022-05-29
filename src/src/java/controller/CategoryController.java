@@ -8,25 +8,28 @@ import dao.CategoryDAO;
 import entity.Category;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import jakarta.faces.context.ExternalContext;
+import jakarta.faces.context.FacesContext;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
-
+import util.UserControl;
 
 @Named(value = "categoryController")
 @SessionScoped
-public class CategoryController implements Serializable{
+public class CategoryController extends UserControl implements Serializable  {
 
     private List<Category> categories;
     private CategoryDAO categoryDAO;
-    private Category category; 
-    
-    public CategoryController() {
+    private Category category;
+
+    public CategoryController() throws IOException {
+        this.isAdmin();
     }
-    
     
 
     public List<Category> getCategories() {
-        
+
         return categories;
     }
 
@@ -34,9 +37,8 @@ public class CategoryController implements Serializable{
         this.categories = categories;
     }
 
-   
     public Category getCategory() {
-        if(this.category == null){
+        if (this.category == null) {
             category = new Category();
         }
         return category;
@@ -45,25 +47,24 @@ public class CategoryController implements Serializable{
     public void setCategory(Category category) {
         this.category = category;
     }
-  
-    
-    public void createCategory(){
+
+    public void createCategory() {
         categoryDAO.create(this.category);
         category = new Category();
     }
-    
-    public void deleteCategory(Category category){
+
+    public void deleteCategory(Category category) {
         categoryDAO.delete(category);
     }
-    
-    public void updateCategory(){
+
+    public void updateCategory() {
         categoryDAO.update(this.category);
         category = new Category();
     }
-    
-    public List<Category> getCategorys() {
+
+    public List<Category> getCategorys() throws IOException {
         categoryDAO = new CategoryDAO();
         return categoryDAO.list();
     }
-    
+
 }

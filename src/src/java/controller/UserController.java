@@ -8,20 +8,23 @@ import dao.UserDAO;
 import entity.User;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import util.UserControl;
 
 
 @Named(value = "userController")
 @SessionScoped
-public class UserController implements Serializable {
+public class UserController extends UserControl  implements Serializable {
     
     private User user;
     private UserDAO userDAO;
     private List<User> users;
     
     
-    public UserController() {
+    public UserController() throws IOException {
+        this.isAdmin();
     }
     
    

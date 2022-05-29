@@ -8,20 +8,23 @@ import dao.ChannelDAO;
 import entity.Channel;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import util.UserControl;
 
 
 @Named(value = "channelController")
 @SessionScoped
-public class ChannelController implements Serializable {
+public class ChannelController extends UserControl implements Serializable {
     
     
     private List<Channel> channels;
     private ChannelDAO channelDAO;
     private Channel channel; 
   
-    public ChannelController() {
+    public ChannelController() throws IOException {
+        this.isAdmin();
     }
     
     

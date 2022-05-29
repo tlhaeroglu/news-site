@@ -190,7 +190,7 @@ public class HaberDAO extends DBConnection {
         try {
             Connection c = this.connect();
 
-            String query = "SELECT * from haber order by haberid asc limit "+pageSize+" offset "+start;
+            String query = "SELECT * from haber order by haberid desc limit "+pageSize+" offset "+start;
             Statement st = c.createStatement();
 
             ResultSet rs = st.executeQuery(query);

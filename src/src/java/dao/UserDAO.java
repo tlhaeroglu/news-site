@@ -96,7 +96,34 @@ public class UserDAO extends DBConnection  {
         }
         
         return list;
-   } 
+   }
+   
+   public User isValidUser(String nickname, String password){
+       System.out.println("Girdimmm");
+       User user = new User();
+       try {
+            Connection c = this.connect();
+
+            Statement st = c.createStatement();
+            String query = "select * from users where nickname= '"+nickname+"' and sifre= '"+password+"'";
+
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                user = new User(
+                     rs.getInt(1),
+                     rs.getString(2),
+                     rs.getString(3),
+                     rs.getString(4),
+                     rs.getString(5),
+                     rs.getBoolean(6),
+                     rs.getDate(7));
+            }
+                        
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+       return user;
+   }
 
  
    

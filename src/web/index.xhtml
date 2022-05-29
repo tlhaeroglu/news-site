@@ -14,7 +14,7 @@
 
         <div class="container">
             <div class="row">
-                <ui:repeat value="#{haberController.list()}" var="h">
+                <ui:repeat value="#{homeController.list()}" var="h">
 
                     <div class="col-6">
 
@@ -22,7 +22,7 @@
                             <div class="h-wrap">
                                 <h3 class="h3"> #{h.baslik} </h3>
                                 <div class="author"> 
-                                    <span><strong> Yayıncı: </strong> #{haberController.getUsername(h.userid)}</span> 
+                                    <span><strong> Yayıncı: </strong> #{homeController.getUsername(h.userid)}</span> 
 
                                     <span class="text-muted"> Okuyan kişi sayısı: #{h.getOkuyucuSayisi()} </span>
                                     <span class="tarih">#{h.haberTarihi}</span>
@@ -44,7 +44,7 @@
                                 <div class="comments">
                                     <div class="h5">Yorumlar: </div>
                                     <ui:repeat value="#{h.yorumlar}" var="y">
-                                        <div class="comment"> <strong>#{haberController.getUsername(y.userid)}: </strong> #{y.icerik} </div>
+                                        <div class="comment"> <strong>#{homeController.getUsername(y.userid)}: </strong> #{y.icerik} </div>
                                         <div class="commentdate"> #{y.yorumTarihi} </div>
                                     </ui:repeat>
                                 </div>

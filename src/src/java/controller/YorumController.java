@@ -8,8 +8,10 @@ import dao.YorumDao;
 import entity.Yorum;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import util.UserControl;
 
 /**
  *
@@ -17,15 +19,15 @@ import java.util.List;
  */
 @Named(value = "yorumController")
 @SessionScoped
-public class YorumController implements Serializable {
+public class YorumController extends UserControl implements Serializable {
+
+    public YorumController() throws IOException {
+        this.isAdmin();
+    }
 
     private List<Yorum> yorumlar;
     private YorumDao yorumDao;
     private Yorum yorum;
-    
-    
-    public YorumController() {
-    }
 
     public List<Yorum> getYorumlar() {
         yorumDao = new YorumDao();
@@ -37,7 +39,7 @@ public class YorumController implements Serializable {
     }
 
     public YorumDao getYorumDao() {
-        if(this.yorumDao == null){
+        if (this.yorumDao == null) {
             yorumDao = new YorumDao();
         }
         return yorumDao;
@@ -48,7 +50,7 @@ public class YorumController implements Serializable {
     }
 
     public Yorum getYorum() {
-        if(this.yorum == null){
+        if (this.yorum == null) {
             yorum = new Yorum();
         }
         return yorum;
@@ -57,24 +59,20 @@ public class YorumController implements Serializable {
     public void setYorum(Yorum yorum) {
         this.yorum = yorum;
     }
-    
-    
-    
-    public void create(){
+
+    public void create() {
         getYorumDao().create(this.yorum);
         yorum = new Yorum();
     }
-    
-    
-    public void delete(Yorum yorum){
+
+    public void delete(Yorum yorum) {
         yorumDao.delete(yorum);
-        
+
     }
-    
-    public void update(){
+
+    public void update() {
         yorumDao.update(this.yorum);
         yorum = new Yorum();
     }
-    
-    
+
 }

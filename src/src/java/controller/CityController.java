@@ -8,9 +8,11 @@ import dao.CityDAO;
 import entity.City;
 import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import util.UserControl;
 
 /**
  *
@@ -18,14 +20,14 @@ import java.util.List;
  */
 @Named(value = "cityController")
 @SessionScoped
-public class CityController implements Serializable {
+public class CityController extends UserControl  implements Serializable {
     
     private City city;
     private CityDAO cityDAO;
     private List<City> cities;
     
-    public CityController() {
-        
+    public CityController() throws IOException {
+        this.isAdmin();
     }
 
     public City getCity(){

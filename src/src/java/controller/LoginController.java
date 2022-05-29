@@ -11,8 +11,10 @@ import jakarta.inject.Named;
 import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.component.UIComponent;
+import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.validator.ValidatorException;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -22,14 +24,26 @@ import java.io.Serializable;
 @Named(value = "loginController")
 @SessionScoped
 public class LoginController implements Serializable {
+    public LoginController() {
 
-    
-    
-    private User user;
+    }
+
+    private User user, myUser;
     private UserDAO userDao;
 
+    public User getMyUser() {
+        if (myUser == null) {
+            myUser = new User();
+        }
+        return myUser;
+    }
+
+    public void setMyUser(User myUser) {
+        this.myUser = myUser;
+    }
+
     public User getUser() {
-        if(user == null){
+        if (user == null) {
             user = new User();
         }
         return user;
@@ -40,7 +54,7 @@ public class LoginController implements Serializable {
     }
 
     public UserDAO getUserDao() {
-        if(userDao == null){
+        if (userDao == null) {
             userDao = new UserDAO();
         }
         return userDao;
@@ -49,47 +63,46 @@ public class LoginController implements Serializable {
     public void setUserDao(UserDAO userDao) {
         this.userDao = userDao;
     }
-    
-    
-    
-    
-    public LoginController() {
-    }
 
-    
-     public boolean validateNickname(FacesContext context,UIComponent cmp,Object value) throws ValidatorException{
+
+    public boolean validateNickname(FacesContext context, UIComponent cmp, Object value) throws ValidatorException {
         String val = (String) value;
-        
-        if(val.isEmpty()){
+
+        if (val.isEmpty()) {
             throw new ValidatorException(new FacesMessage("Kullanıcı Adı Alanı Boş Olamaz!"));
         }
         return true;
     }
-    public boolean validatePassword(FacesContext context,UIComponent cmp,Object value) throws ValidatorException{
+
+    public boolean validatePassword(FacesContext context, UIComponent cmp, Object value) throws ValidatorException {
         String val = (String) value;
-        
-        if(val.isEmpty()){
+
+        if (val.isEmpty()) {
             throw new ValidatorException(new FacesMessage("Şifre Alanı Boş Olamaz!"));
         }
         return true;
     }
-    
-    
-    
-    
-    public String login(){
-        if( user.getNickname().equals("test") && user.getSifre().equals("1234")){
-            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser",user);
+
+    public void login() throws IOException {
+        String username = getUser().getNickname();
+        String password = getUser().getSifre();
+        User u = (User) getUserDao().isValidUser(username, password);
+        if (u.getUserid() != 0) {
+            FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", u);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Giriş Başarılı"));
-            return "/index.xhtml";
-            //return "/panel/signin.xhtml";
-        }else{
-          FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kullanıcı adı veya şifre hatalı"));
-          return "/panel/login.xhmtl";
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            externalContext.redirect("/src/index.xhtml");
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kullanıcı adı veya şifre hatalı"));
+            //return "/panel/login.xhmtl";
         }
-        
+
+    }
+    
+    public void logout() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", new User());
+        ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+        externalContext.redirect("/src/panel/login.xhtml");
     }
 
-     
-    
 }

@@ -22,7 +22,7 @@
                 Nickname <h:inputText id="nickname" validator="#{loginController.validateNickname}" value="#{loginController.user.nickname}" />
                 <h:message for="nickname" style="color: red;font-size: 10pt;"/>
                 
-                Şifre <h:inputText id="password" validator="#{loginController.validatePassword}" value="#{loginController.user.sifre}" />
+                Şifre <h:inputSecret id="password" validator="#{loginController.validatePassword}" value="#{loginController.user.sifre}" />
                 <h:message for="password" style="color: red;font-size: 10pt;"/><br></br>
                 <h:commandButton action="#{loginController.login()}" value="Giriş Yap" />
             </h:form>
