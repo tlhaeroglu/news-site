@@ -39,8 +39,6 @@ public class LoginFilter implements Filter {
             user = (UserManager) session.getAttribute("validUser");
         }
         
-        
-        
         fc.doFilter(sr,sr1);
         
         

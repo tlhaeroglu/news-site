@@ -77,12 +77,15 @@ public class LoginController implements Serializable {
     
     
     
-    public void login(){
+    public String login(){
         if( user.getNickname().equals("test") && user.getSifre().equals("1234")){
             FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser",user);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Giriş Başarılı"));
+            return "/index.xhtml";
+            //return "/panel/signin.xhtml";
         }else{
           FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Kullanıcı adı veya şifre hatalı"));
+          return "/panel/login.xhmtl";
         }
         
     }
