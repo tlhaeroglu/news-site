@@ -27,7 +27,9 @@
                                     <span class="text-muted"> Okuyan kişi sayısı: #{h.getOkuyucuSayisi()} </span>
                                     <span class="tarih">#{h.haberTarihi}</span>
                                 </div>
-                                <h:graphicImage library="images" name="example.jpg" class="img-fluid"></h:graphicImage>
+                                <div class="text-center">
+                                <h:graphicImage library="images" name="#{h.imgurl}" class="img-fluid"></h:graphicImage>
+                                </div>
                                 <p class="icerik"> #{h.icerik}</p>
 
 

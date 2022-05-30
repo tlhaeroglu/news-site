@@ -15,14 +15,14 @@ import java.io.IOException;
  */
 public abstract class UserControl {
     
-    public void control() throws IOException{
+    public void control() throws IOException{/*
         if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("validUser") == null) {
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             externalContext.redirect("/src/panel/login.xhtml");
-        }
+        }*/
     }
     
-    public void isAdmin() throws IOException{
+    public void isAdmin() throws IOException{/*
         if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("validUser") == null) {
             ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
             externalContext.redirect("/src/panel/login.xhtml");
@@ -32,7 +32,7 @@ public abstract class UserControl {
                 ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
                 externalContext.redirect("/src/panel/login.xhtml");
             }
-        }
+        }*/
     }
     
 }

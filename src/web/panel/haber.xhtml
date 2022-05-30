@@ -16,10 +16,10 @@
                 Haber İşlemleri
             </h1>
 
-            <h:form  id="haber-form">
+            <h:form  id="haber-form" enctype="multipart/form-data" >
                 <div>Başlık: <h:inputText value="#{haberController.haber.baslik}" /></div>
                 <p></p>
-                <div>ImgURL: <h:inputText value="#{haberController.haber.imgurl}" /></div>
+                <div>Image: <h:inputFile value="#{haberController.file}"></h:inputFile> </div>
                 <p></p>
                 <div>İçerik: <h:inputText value="#{haberController.haber.icerik}"  /></div>
                 <p></p>

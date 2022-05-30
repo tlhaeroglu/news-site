@@ -12,8 +12,13 @@ import jakarta.enterprise.context.SessionScoped;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.ExternalContext;
 import jakarta.faces.context.FacesContext;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.http.Part;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.nio.file.Files;
 import java.util.List;
 import util.UserControl;
 
@@ -24,6 +29,8 @@ import util.UserControl;
 @Named(value = "haberController")
 @SessionScoped
 public class HaberController extends UserControl implements Serializable {
+    
+    final String absolutePath = "C:/Users/TALHA/Documents/NetBeansProjects/news-site/src/web/resources/images/";
 
     public HaberController(){
         
@@ -35,6 +42,17 @@ public class HaberController extends UserControl implements Serializable {
     private int page = 1;
     private int pageSize = 3;
     private int pageCount;
+    private Part file;
+    
+
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+    
 
     public void next() {
         this.page++;
@@ -92,6 +110,23 @@ public class HaberController extends UserControl implements Serializable {
     }
 
     public void create() {
+        /* UPLOAD */
+        
+        if(file != null && file.getSize() > 0){
+            try{
+                InputStream input = getFile().getInputStream();
+                String temp = absolutePath+file.getSubmittedFileName();
+                File f = new File(temp);
+                Files.copy(input, f.toPath());
+                this.haber.setImgurl(file.getSubmittedFileName());
+            } catch(Exception e){
+                System.out.println(e.getMessage());
+            }
+        } else{
+          this.haber.setImgurl("");  
+        }
+        /* UPLOAD */
+        
         this.getHaberDAO().create(this.haber);
         haber = new Haber();
     }

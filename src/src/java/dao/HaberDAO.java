@@ -122,7 +122,7 @@ public class HaberDAO extends DBConnection {
         try {
             Connection c = this.connect();
 
-            String query = "SELECT * from haber order by haberid";
+            String query = "SELECT * from haber order by haberid DESC";
             Statement st = c.createStatement();
 
             ResultSet rs = st.executeQuery(query);
