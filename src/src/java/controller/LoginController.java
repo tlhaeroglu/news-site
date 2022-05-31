@@ -99,10 +99,27 @@ public class LoginController implements Serializable {
 
     }
     
-    public void logout() throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", new User());
+    public String logout() throws IOException {
+        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("validUser", null);
         ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-        externalContext.redirect("/src/panel/login.xhtml");
+        return "/panel/login.xhtml?faces-redirect=true";
+    }
+    
+    public String isAdmin(String path){
+        if (FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("validUser") == null) {
+            ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+            return "/panel/login.xhtml?faces-redirect=true";
+        } else{
+            User user2 = (User) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("validUser");
+            if(path.equals("haber") ) {
+                return "/panel/"+path+".xhtml?faces-redirect=true";
+            }
+            else if(user2.isIsAdmin()){
+               return "/panel/"+path+".xhtml?faces-redirect=true";
+            }else {
+                return "/panel/login.xhtml?faces-redirect=true";
+            }
+        }
     }
 
 }
