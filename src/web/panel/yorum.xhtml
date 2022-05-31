@@ -13,9 +13,12 @@
         <div class="container myform" >
             <h1> Yorum İşlemleri </h1>
             <h:form>
-                Haber Id <h:inputText value="#{yorumController.yorum.haberid}" />
-                User ID <h:inputText value="#{yorumController.yorum.userid}"  />
-                İçerik <h:inputText value="#{yorumController.yorum.icerik}"  /><br />
+                Haber Id <h:inputText id="hid" value="#{yorumController.yorum.haberid}" required="true" requiredMessage="alanı doldur"/>
+                <h:message for="hid" style="color: red; font-size: 10pt;"/> <br/>
+                User ID <h:inputText id="uid" value="#{yorumController.yorum.userid}"  required="true" requiredMessage="alanı doldur"/>
+                <h:message for="uid" style="color: red; font-size: 10pt;"/> <br/>
+                İçerik <h:inputText id="iid" value="#{yorumController.yorum.icerik}"  required="true" requiredMessage="alanı doldur"/>
+                <h:message for="iid" style="color: red; font-size: 10pt;"/> <br/>
                 <h:commandButton rendered="#{yorumController.yorum.yorumid==0}" action="#{yorumController.create()}" value="Create" />
                 <h:commandButton rendered="#{yorumController.yorum.yorumid!=0}" action="#{yorumController.update()}" value="Update" />
             </h:form>

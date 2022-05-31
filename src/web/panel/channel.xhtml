@@ -13,7 +13,8 @@
         <div class="container myform">
             <h1> Kanal İşlemleri </h1>
             <h:form>
-                Kanal Adi <h:inputText value="#{channelController.channel.kanaladi}" /><br />
+                Kanal Adi <h:inputText id="kid" value="#{channelController.channel.kanaladi}" required="true" requiredMessage="alanı doldur"/>
+                <h:message for="kid" style="color: red; font-size: 10pt;"/> <br/>
                 <h:commandButton rendered="#{channelController.channel.kanalid==0}" action="#{channelController.createChannel()}" value="Create" />
                 <h:commandButton rendered="#{channelController.channel.kanalid!=0}" action="#{channelController.updateChannel()}" value="Update" />
             </h:form>

@@ -18,10 +18,14 @@
 
 
             <h:form>
-                Ad: <h:inputText value="#{userController.user.ad}" />
-                Soyad: <h:inputText value="#{userController.user.soyad}"  />
-                Nickname: <h:inputText value="#{userController.user.nickname}"  />
-                Sifre: <h:inputText value="#{userController.user.sifre}" /><br />
+                Ad: <h:inputText id="aid" value="#{userController.user.ad}" required="true" requiredMessage="alanı doldur"/>
+                <h:message for="aid" style="color: red; font-size: 10pt;"/> <br/>
+                Soyad: <h:inputText id="Sid" value="#{userController.user.soyad}" required="true" requiredMessage="alanı doldur"/>
+                <h:message for="Sid" style="color: red; font-size: 10pt;"/> <br/>
+                Nickname: <h:inputText id="nid" value="#{userController.user.nickname}" required="true" requiredMessage="alanı doldur"/>
+                <h:message for="nid" style="color: red; font-size: 10pt;"/> <br/>
+                Sifre: <h:inputText id="sid" value="#{userController.user.sifre}" required="true" requiredMessage="alanı doldur"/>
+                <h:message for="sid" style="color: red; font-size: 10pt;"/> <br/>
                 <h:commandButton rendered="#{userController.user.userid==0}" action="#{userController.create()}" value="Create" />
                 <h:commandButton rendered="#{userController.user.userid!=0}" action="#{userController.update()}" value="Update" />
             </h:form>

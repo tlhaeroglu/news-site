@@ -15,7 +15,8 @@
             <h1> Kategori İşlemleri </h1>
 
             <h:form>
-                Kategori Adi <h:inputText value="#{categoryController.category.kategoriadi}" /><br />
+                Kategori Adi <h:inputText id="c" value="#{categoryController.category.kategoriadi}"  required="true" requiredMessage="alanı doldur"/>
+                <h:message for="c" style="color: red; font-size: 10pt;"/> <br/>
                 <h:commandButton rendered="#{categoryController.category.kategoriid==0}" action="#{categoryController.createCategory()}" value="Create" />
                 <h:commandButton rendered="#{categoryController.category.kategoriid!=0}" action="#{categoryController.updateCategory()}" value="Update" />
             </h:form>
