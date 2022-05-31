@@ -120,10 +120,11 @@ public class HaberController extends UserControl implements Serializable {
                 Files.copy(input, f.toPath());
                 this.haber.setImgurl(file.getSubmittedFileName());
             } catch(Exception e){
+                this.haber.setImgurl("example.jpg"); 
                 System.out.println(e.getMessage());
             }
         } else{
-          this.haber.setImgurl("");  
+          this.haber.setImgurl("example.jpg");  
         }
         /* UPLOAD */
         

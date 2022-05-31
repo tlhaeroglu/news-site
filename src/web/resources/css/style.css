@@ -107,17 +107,46 @@ body{
 .myform form{
     display: flex;
     align-items: center;
-    flex-direction: column; 
+    flex-direction: column;
 }
 
 .myform form input{
-   padding: 5px 8px;
-   border-radius: 10px;
-   border: 1px solid #bebebe;
+    padding: 5px 8px;
+    border-radius: 10px;
+    border: 1px solid #bebebe;
 }
 
 
+.alert-panel{
+    display: none;
+    min-width: 275px;
+    height: auto;
+    background-color: rgb(95, 73, 0);
+    position: fixed;
+    top: 130px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    border-radius: 20px;
+    padding: 40px;
+}
 
+.close{
+    display: block;
+    text-align: end;
+    font-size: 1.3rem;
+    color: #fff;
+    cursor: pointer;
+}
+
+.form-elm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 10px 0px;
+    color: #fff;
+    font-size: 1.1rem;
+}
 
 
 

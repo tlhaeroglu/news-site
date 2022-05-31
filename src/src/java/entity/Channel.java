@@ -68,6 +68,12 @@ public class Channel implements Serializable {
         final Channel other = (Channel) obj;
         return this.kanalid == other.kanalid;
     }
+
+    @Override
+    public String toString() {
+        return "kanalid=" + kanalid + ", kanaladi=" + kanaladi;
+    }
+    
     
     
     

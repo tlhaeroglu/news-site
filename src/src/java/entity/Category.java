@@ -59,6 +59,13 @@ public class Category {
         final Category other = (Category) obj;
         return this.kategoriid == other.kategoriid;
     }
+
+    @Override
+    public String toString() {
+        return  "kategoriid=" + kategoriid + ", kategoriadi=" + kategoriadi;
+    }
+    
+    
     
     
 }

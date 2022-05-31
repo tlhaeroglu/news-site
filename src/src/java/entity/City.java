@@ -66,6 +66,11 @@ public class City implements Serializable {
         final City other = (City) obj;
         return this.sehirid == other.sehirid;
     }
+
+    @Override
+    public String toString() {
+        return "sehirid=" + sehirid + ", sehiradi=" + sehiradi;
+    }
     
     
     

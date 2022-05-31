@@ -10,6 +10,14 @@
     <h:body>
         <ui:include src="../partials/nav.xhtml" />
 
+        <div class="alert-panel">
+            <span class="close" role="button"><strong>X</strong></span>
+            <div class="wrap-panel">
+                <div class="form-elm">
+                    <label class="info">Erişilemedi</label>
+                </div>
+            </div>
+        </div>
 
         <div class="container myform">
             <h1>
@@ -89,17 +97,21 @@
                 </h:column>
                 <h:column>
                     <f:facet name="header"> kategoriid</f:facet>
-                    <h:outputText value="#{h.category.kategoriadi}"/>  
+                    <div class="category" data-item="#{h.category.toString()}">
+                        <h:outputText value="#{h.category.kategoriadi}"/>
+                    </div>
                 </h:column>
                 <h:column>
                     <f:facet name="header"> sehirid</f:facet>
                     <ui:repeat value="#{h.cities}" var="c">
-                        <div> #{c.sehiradi} </div>
+                        <div class="city" data-item="#{c.toString()}"> #{c.sehiradi} </div>
                     </ui:repeat>
                 </h:column>
                 <h:column>
                     <f:facet name="header"> kanalid</f:facet>
-                    <h:outputText value="#{h.channel.kanaladi}"/>  
+                    <div class="channel" data-item="#{h.channel.toString()}">
+                        <h:outputText value="#{h.channel.kanaladi}"/> 
+                    </div>
                 </h:column>
 
                 <h:column>
@@ -146,8 +158,48 @@
                     </div>
                 </p></center>
 
+            <script>
+                const close = document.querySelector(".close");
+                const info = document.querySelector(".info");
+                const panel = document.querySelector(".alert-panel");
+                close.addEventListener("click", (e) => {
+                    panel.style.display = 'none';
+                });
+
+                const channel = document.querySelectorAll(".channel");
+                channel.forEach((ev) => {
+                    ev.addEventListener("click", (e) => {
+                        let newText = e.target.getAttribute("data-item");
+                        info.innerHTML = newText;
+                        panel.style.display = 'block';
+                    });
+                });
+
+                const city = document.querySelectorAll(".city");
+                city.forEach((ev) => {
+                    ev.addEventListener("click", (e) => {
+                        let newText = e.target.getAttribute("data-item");
+                        info.innerHTML = newText;
+                        panel.style.display = 'block';
+                    });
+                });
+
+                const category = document.querySelectorAll(".category");
+                category.forEach((ev) => {
+                    ev.addEventListener("click", (e) => {
+                        let newText = e.target.getAttribute("data-item");
+                        info.innerHTML = newText;
+                        panel.style.display = 'block';
+                    });
+                });
+
+            </script>
+
 
         </h:form>
+
+
+
 
 
 
